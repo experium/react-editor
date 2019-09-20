@@ -1,0 +1,25 @@
+.editor {
+    display: flex;
+    flex-direction: row;
+}
+
+.editorCol {
+    width: 50%;
+    padding-right: 15px;
+    border-right: 1px solid #e8e8e8;
+}
+
+.editorPreviewCol {
+    width: 50%;
+    padding-left: 15px;
+}
+
+.editorCol p,
+.editorPreviewCol p {
+    margin-bottom: 0 !important
+}
+
+.editorField {
+    padding: 10px;
+    border: 1px solid #e8e8e8;
+}

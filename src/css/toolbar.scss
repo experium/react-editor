@@ -1,0 +1,35 @@
+.draggableToolbarItemWrapper {
+    padding: 5px;
+    list-style: none;
+}
+
+.draggingToolbarItemWrapper {
+    transform: none !important;
+}
+
+.draggableToolbarItem {
+    padding: 10px;
+    border: 1px dashed #ddd;
+    background: #fff;
+    position: relative;
+}
+
+.draggableToolbarItem i {
+    margin-right: 10px;
+}
+
+.toolbar {
+    float: right;
+    width: 250px;
+    background: #fff;
+    margin-top: -28px;
+}
+
+.toolbar h4 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.toolbar ul {
+    padding: 0;
+}

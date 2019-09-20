@@ -1,0 +1,16 @@
+.rangeSettings {
+    position: relative;
+}
+
+.maxValueInput {
+    float: right;
+}
+.minValueInput {
+    float: left;
+}
+
+.stepInput {
+    position: absolute;
+    left: calc(50% - 66px);
+    top: -4px;
+}
