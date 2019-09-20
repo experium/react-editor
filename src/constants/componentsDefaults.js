@@ -9,6 +9,7 @@ import Editor from '../components/formElements/Editor';
 import EditorComponent from '../components/formElements/EditorComponent';
 import Video, { Video as VideoComponent } from '../components/formElements/Video';
 import File, { FileField } from '../components/formElements/File';
+import DownloadFile, { DownloadFile as DownloadFileComponent } from '../components/formElements/DownloadFile';
 
 const renderInfo = (prop = 'label') => props => <div dangerouslySetInnerHTML={{ __html: props[prop] }} />;
 
@@ -136,6 +137,21 @@ const COMPONENTS_DEFAULTS = placeholder => ([
         },
         fields: [
             { type: 'editor', label: 'Название поля', prop: 'label', props: { short: true }}
+        ]
+    },
+    {
+        type: 'DownloadFile',
+        name: 'Скачивание файла',
+        icon: 'download',
+        component: DownloadFile,
+        formComponent: DownloadFileComponent,
+        staticContent: true,
+        props: {
+            label: 'Файл'
+        },
+        fields: [
+            { type: 'editor', label: 'Название поля', prop: 'label', props: { short: true }},
+            { type: 'uploader', label: 'Файл', prop: 'file' }
         ]
     }
 ]);

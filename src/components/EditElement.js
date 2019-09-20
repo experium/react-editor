@@ -14,12 +14,14 @@ import Editor from './editFields/Editor';
 import Multiple from './editFields/Multiple';
 import Switch from './editFields/Switch';
 import withComponentsContext from '../hocs/withComponentsContext';
+import Uploader from './editFields/Uploader';
 
 const FIELDS = {
     editor: Editor,
     input: Input,
     multiple: Multiple,
-    switch: Switch
+    switch: Switch,
+    uploader: Uploader
 };
 
 class EditElement extends Component {

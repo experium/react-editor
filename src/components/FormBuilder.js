@@ -12,6 +12,7 @@ import FormGenerator from './FormGenerator';
 import { reorder } from '../utils/dnd';
 import styles from '../css/formBuilder.scss';
 import Settings from './Settings';
+import FileUrlContext from '../contexts/FileUrlContext';
 
 class FormBuilder extends Component {
     static propTypes = {
@@ -71,7 +72,7 @@ class FormBuilder extends Component {
     }
 
     render() {
-        const { items, elements, addItem, components, commonSettings } = this.props;
+        const { items, elements, addItem, components, commonSettings, uploadUrl, downloadUrl } = this.props;
 
         return <div className={cx(styles.experiumPlayerBuilder, 'experium-player-builder')}>
             <div className={cx(styles.reactFormBuilder, 'react-form-builder clearfix')}>
@@ -90,10 +91,15 @@ class FormBuilder extends Component {
                         </Button>
                     </Button.Group>
                 </div>
-                <DragDropContext onDragEnd={this.onDragEnd}>
-                    <Container {...this.props} />
-                    <Toolbar addItem={addItem} />
-                </DragDropContext>
+                <FileUrlContext.Provider value={{
+                    uploadUrl,
+                    downloadUrl
+                }}>
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                        <Container {...this.props} />
+                        <Toolbar addItem={addItem} />
+                    </DragDropContext>
+                </FileUrlContext.Provider>
                 <Modal
                     title='Предпросмотр'
                     visible={this.state.preview}
