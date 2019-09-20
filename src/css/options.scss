@@ -1,0 +1,64 @@
+.optionItem:hover .optionRemoveBtn {
+    display: inline-block;
+}
+
+.optionReorder {
+    display: inline-block;
+    padding: 5px 10px 5px 5px;
+    cursor: grab;
+}
+
+.optionAddBtn,
+.optionRemoveBtn {
+    border: none !important;
+    font-weight: 700 !important;
+    margin-right: 5px;
+}
+
+.optionRemoveBtn {
+    display: none;
+}
+
+.optionLabel p {
+    display: inline;
+}
+
+.correctAnswers p {
+    display: inline-block;
+    margin-bottom: 0 !important;
+}
+    
+.correctAnswers em {
+    font-style: normal !important;
+}
+
+.correctAnswers u {
+    text-decoration: none !important;
+}
+
+.correctAnswers strong {
+    font-weight: normal !important;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 10px;
+}
+
+.contentWithImage {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,.2);
+    margin-bottom: 10px;
+}
+
+.inlineOptions div[data-react-beautiful-dnd-draggable] {
+    display: inline-flex;
+    margin-right: 10px;
+    vertical-align: bottom;
+}

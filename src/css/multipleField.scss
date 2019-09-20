@@ -1,0 +1,43 @@
+.item {
+    display: flex;
+    padding-bottom: 10px;
+    background: #fff;
+    :global {
+        .ant-row.ant-form-item {
+            width: 100%;
+            margin-bottom: 0;
+        }
+        .ant-btn.ant-btn-icon-only {
+            height: 39px;
+        }
+        .ant-btn-danger {
+            width: 40px;
+        }
+        .ant-btn {
+            border: none;
+            box-shadow: none;
+        }
+        .ant-upload-select {
+            margin-left: 5px;
+        }
+        .ant-form-item-label {
+            display: none;
+        }
+    }
+}
+
+.itemHasImage {
+    padding-bottom: 32px;
+}
+
+.itemContent {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.dragHandler {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}

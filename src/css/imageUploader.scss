@@ -1,0 +1,24 @@
+.image {
+    background-position: center;
+    width: 15px;
+    height: 15px;
+    background-size: cover;
+    margin-right: 10px;
+}
+
+.imageInfo {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    bottom: -30px;
+}
+
+.imageRemoveBtn {
+    margin-left: 15px;
+    cursor: pointer;
+    transition: all .3s;
+    &:hover {
+        color: #000;
+    }
+}

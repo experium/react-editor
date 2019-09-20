@@ -1,0 +1,33 @@
+dist: trusty
+language: node_js
+node_js: stable
+
+script:
+- echo "skipping tests"
+
+jobs:
+  include:
+    - stage: npm release
+      node_js: stable
+      before_deploy:
+      - yarn install
+      - yarn package
+      deploy:
+        skip_cleanup: true
+        provider: npm
+        email: "webdev@experium.ru"
+        api_key: "$NPM_API_KEY"
+        on:
+          branch: master
+    - stage: deploy gh pages
+      before_deploy:
+      - yarn install
+      - yarn build
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: "$GITHUB_TOKEN"
+        keep-history: true
+        local-dir: dist
+        on:
+          branch: master
