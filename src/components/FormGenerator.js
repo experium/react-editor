@@ -10,6 +10,7 @@ import COMPONENTS_DEFAULTS from '../constants/componentsDefaults';
 import FormField from './FormField';
 import FileUrlContext from '../contexts/FileUrlContext';
 import styles from '../css/formBuilder.scss';
+import ComponentsContext from '../contexts/ComponentsContext';
 
 export class FormGenerator extends Component {
     static propTypes = {
@@ -106,25 +107,27 @@ export class FormGenerator extends Component {
         const { page } = this.state;
 
         return <div className={cx(styles.experiumPlayerBuilder, 'experium-player-builder')}>
-            <FileUrlContext.Provider value={{
-                uploadUrl,
-                downloadUrl
-            }}>
-                <Form
-                    className='formGenerator'
-                    onSubmit={this.onSubmit}
-                    initialValues={values}
-                    subscription={{ submitting: true, submitFailed: true, invalid: true }}
-                    render={({ handleSubmit, invalid }) =>
-                        <FormComponent onSubmit={handleSubmit}>
-                            <DragDropContext>
-                                { addIndex(filter)((item, index) =>
-                                    common.pages ? index === page : true, items).map((row, index) => this.renderRow(row, index, invalid)
-                                )}
-                            </DragDropContext>
-                        </FormComponent>
-                    } />
-            </FileUrlContext.Provider>
+            <ComponentsContext.Provider value={this.getComponents()}>
+                <FileUrlContext.Provider value={{
+                    uploadUrl,
+                    downloadUrl
+                }}>
+                    <Form
+                        className='formGenerator'
+                        onSubmit={this.onSubmit}
+                        initialValues={values}
+                        subscription={{ submitting: true, submitFailed: true, invalid: true }}
+                        render={({ handleSubmit, invalid }) =>
+                            <FormComponent onSubmit={handleSubmit}>
+                                <DragDropContext>
+                                    { addIndex(filter)((item, index) =>
+                                        common.pages ? index === page : true, items).map((row, index) => this.renderRow(row, index, invalid)
+                                    )}
+                                </DragDropContext>
+                            </FormComponent>
+                        } />
+                </FileUrlContext.Provider>
+            </ComponentsContext.Provider>
         </div>;
     }
 }
