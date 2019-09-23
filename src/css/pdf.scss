@@ -1,0 +1,20 @@
+.pdfFooter {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.pdfPageButtons {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.pdf {
+    :global {
+        .react-pdf__Page {
+            text-align: center;
+        }
+        .react-pdf__Page__canvas {
+            display: inline-block !important;
+        }
+    }
+}

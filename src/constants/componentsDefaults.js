@@ -10,6 +10,7 @@ import EditorComponent from '../components/formElements/EditorComponent';
 import Video, { Video as VideoComponent } from '../components/formElements/Video';
 import File, { FileField } from '../components/formElements/File';
 import DownloadFile, { DownloadFile as DownloadFileComponent } from '../components/formElements/DownloadFile';
+import Pdf, { PdfComponent } from '../components/formElements/Pdf';
 
 const renderInfo = (prop = 'label') => props => <div dangerouslySetInnerHTML={{ __html: props[prop] }} />;
 
@@ -121,8 +122,8 @@ const COMPONENTS_DEFAULTS = placeholder => ([
         },
         fields: [
             { type: 'input', label: 'Ссылка на видео', prop: 'src' },
-            { type: 'input', label: 'Высота', prop: 'width', props: { number: true }},
-            { type: 'input', label: 'Ширина', prop: 'height', props: { number: true }}
+            { type: 'input', label: 'Высота', prop: 'height', props: { number: true }},
+            { type: 'input', label: 'Ширина', prop: 'width', props: { number: true }}
         ]
     },
     {
@@ -152,6 +153,18 @@ const COMPONENTS_DEFAULTS = placeholder => ([
         fields: [
             { type: 'editor', label: 'Название поля', prop: 'label', props: { short: true }},
             { type: 'uploader', label: 'Файл', prop: 'file' }
+        ]
+    },
+    {
+        type: 'Pdf',
+        name: 'PDF-презентация',
+        icon: 'file-pdf-o',
+        component: Pdf,
+        formComponent: PdfComponent,
+        staticContent: true,
+        fields: [
+            { type: 'uploader', label: 'Файл', prop: 'file', props: { accept: '.pdf' }},
+            { type: 'input', label: 'Ширина', prop: 'width', props: { number: true }}
         ]
     }
 ]);

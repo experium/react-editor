@@ -38,7 +38,7 @@ class Uploader extends Component {
     delete = () => this.props.onChange(null);
 
     render() {
-        const { input: { value }, uploadUrl } = this.props;
+        const { input: { value }, uploadUrl, accept } = this.props;
         const props = uploadUrl ? {
             action: uploadUrl,
             onChange: this.onChange
@@ -54,7 +54,7 @@ class Uploader extends Component {
                 </Button>
             </Fragment> :
             <Fragment>
-                <Upload {...props} fileList={[]}>
+                <Upload {...props} fileList={[]} accept={accept}>
                     <Button>
                         <Icon type='upload' /> Загрузить файл
                     </Button>
