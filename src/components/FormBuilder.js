@@ -101,6 +101,7 @@ class FormBuilderComponent extends Component {
                     </DragDropContext>
                 </FileUrlContext.Provider>
                 <Modal
+                    className='react-form-builder-preview-modal'
                     title='Предпросмотр'
                     visible={this.state.preview}
                     onCancel={this.closePreview}
@@ -112,6 +113,7 @@ class FormBuilderComponent extends Component {
                 </Modal>
                 <Modal
                     title='Настройки'
+                    className='react-form-builder-settings-modal'
                     visible={this.state.showSettings}
                     onCancel={this.closeSettings}
                     destroyOnClose

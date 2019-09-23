@@ -91,6 +91,7 @@ export const withElementWrapper = WrappedComponent => {
                 <EditModalContext.Consumer>
                     { ({ opened, setOpened }) =>
                         <Modal
+                            className='react-form-builder-element-modal'
                             title={name}
                             visible={id === opened}
                             onCancel={() => setOpened(null)}
