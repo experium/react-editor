@@ -50,7 +50,7 @@ class EditElement extends Component {
                 initialValues={item}
                 mutators={arrayMutators}
                 render={({ handleSubmit, values }) =>
-                    <div className={cx(styles.editor, 'edit-element')}>
+                    <div className={cx(styles.editor, item.type, 'edit-element')}>
                         <div className={cx(styles.editorCol, 'edit-element-col')}>
                             <FormComponent onSubmit={handleSubmit}>
                                 { fields.map(item =>
