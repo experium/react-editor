@@ -60,12 +60,12 @@ export const withElementWrapper = WrappedComponent => {
                 <div className={cx(styles.sortableRow, 'sortable-row')}>
                     <EditModalContext.Consumer>
                         { ({ setOpened }) =>
-                            <button className={cx(styles.toolbarEditBtn, 'toolbar-edit-btn')} onClick={() => setOpened(id)}>
+                            <button type='button' className={cx(styles.toolbarEditBtn, 'toolbar-edit-btn')} onClick={() => setOpened(id)}>
                                 <i className='fa fa-edit'></i>
                             </button>
                         }
                     </EditModalContext.Consumer>
-                    <button className={cx(styles.toolbarRemoveBtn, 'toolbar-remove-btn')} onClick={() => removeItem(id)}>
+                    <button type='button' className={cx(styles.toolbarRemoveBtn, 'toolbar-remove-btn')} onClick={() => removeItem(id)}>
                         <i className='fa fa-remove'></i>
                     </button>
                     <div {...dragHandleProps} className={cx(styles.sortableRowDragHandle, 'sortable-row-drag-handle')}>
