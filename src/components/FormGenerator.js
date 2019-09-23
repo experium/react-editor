@@ -11,7 +11,7 @@ import FormField from './FormField';
 import FileUrlContext from '../contexts/FileUrlContext';
 import styles from '../css/formBuilder.scss';
 
-export default class FormGenerator extends Component {
+export class FormGenerator extends Component {
     static propTypes = {
         data: PropTypes.object,
         onSubmit: PropTypes.func,

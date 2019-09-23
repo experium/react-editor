@@ -11,7 +11,7 @@ export default WrappedComponent =>
                         {...this.props}
                         uploadUrl={uploadUrl}
                         downloadUrl={downloadUrl} />
-                    }
+                }
             </FileUrlContext.Consumer>;
         }
     };

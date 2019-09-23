@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button } from 'antd';
 
-import withElementWrapper from '../../hocs/withElementWrapper';
+import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFileUrlContext from '../../hocs/withFileUrlContext';
 
 class DownloadFileComponent extends Component {
@@ -18,7 +18,7 @@ class DownloadFileComponent extends Component {
                     href={file.id ? downloadUrl(file.id) : file.body}
                     download>
                     Скачать
-            </Button>}
+                </Button>}
         </Fragment>;
     }
 }

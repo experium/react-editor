@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Icon, Upload } from 'antd';
 
-import withElementWrapper from '../../hocs/withElementWrapper';
+import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
 import withFileUrlContext from '../../hocs/withFileUrlContext';
 

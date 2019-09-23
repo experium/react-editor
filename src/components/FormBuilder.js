@@ -8,13 +8,13 @@ import cx from 'classnames';
 import Toolbar from './Toolbar';
 import Container from './Container';
 import withData from '../hocs/withData';
-import FormGenerator from './FormGenerator';
+import { FormGenerator } from './FormGenerator';
 import { reorder } from '../utils/dnd';
 import styles from '../css/formBuilder.scss';
 import Settings from './Settings';
 import FileUrlContext from '../contexts/FileUrlContext';
 
-class FormBuilder extends Component {
+class FormBuilderComponent extends Component {
     static propTypes = {
         addItem: PropTypes.func,
         reorderItems: PropTypes.func,
@@ -125,4 +125,4 @@ class FormBuilder extends Component {
     }
 }
 
-export default withData(FormBuilder);
+export const FormBuilder = withData(FormBuilderComponent);

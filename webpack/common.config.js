@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './demo/app.js',
@@ -8,11 +9,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['es2015', 'react', 'stage-0'],
-                    plugins: ['transform-decorators-legacy']
-                }
+                exclude: /node_modules/
             },
             {
                 test: /\.css$/,
@@ -20,7 +17,17 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/,
-                use: ['style-loader', 'css-loader?modules&importLoaders=2&localIdentName=[name]__[local]___[hash:base64:5]', 'sass-loader']
+                use: [
+                    (process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader'),
+                    { loader: 'css-loader', options: {
+                        modules: true,
+                        importLoaders: 2,
+                        modules: {
+                            localIdentName: '[name]__[local]___[hash:base64:5]'
+                        }
+                    }},
+                    'sass-loader'
+                ]
             },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,

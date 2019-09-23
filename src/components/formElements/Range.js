@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Slider, InputNumber } from 'antd';
 import cx from 'classnames';
 
-import withElementWrapper from '../../hocs/withElementWrapper';
+import { withElementWrapper } from '../../hocs/withElementWrapper';
 import Editor from './Editor';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
 import styles from '../../css/range.scss';

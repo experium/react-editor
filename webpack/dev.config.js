@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     output: {
@@ -15,7 +15,8 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'eslint-loader',
                 options: {
-                    configFile: './.eslintrc'
+                    configFile: './.eslintrc',
+                    fix: true
                 }
             },
         ]
@@ -29,11 +30,7 @@ module.exports = {
                 'NODE_ENV': '"development"'
             }
         }),
-        new CleanWebpackPlugin('.tmp', {
-            root: path.resolve(__dirname, '..'),
-            verbose: true,
-            dry: false
-        }),
+        new CleanWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {

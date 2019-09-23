@@ -6,7 +6,7 @@ import { append, remove, path, propEq, find, any } from 'ramda';
 import cx from 'classnames';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-import withElementWrapper from '../../hocs/withElementWrapper';
+import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
 import styles from '../../css/options.scss';
 import { shuffle } from '../../utils/methods';

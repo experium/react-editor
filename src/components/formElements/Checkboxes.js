@@ -6,7 +6,7 @@ import uniqid from 'uniqid';
 import cx from 'classnames';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-import withElementWrapper from '../../hocs/withElementWrapper';
+import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
 import styles from '../../css/options.scss';
 import { shuffle } from '../../utils/methods';
@@ -139,11 +139,11 @@ class Checkboxes extends Component {
             { !!(disabled && incorrect.length) &&
                 <div className={styles.correctAnswers}>
                     <b>Правильные ответы: </b>
-                        { correct.map((id, index) =>
-                            <span
-                                key={`correct-${id}`}
-                                dangerouslySetInnerHTML={{ __html: `${index ? ', ' : ''}${path(['label'], find(propEq('id', id), options))}` }} />
-                        )}
+                    { correct.map((id, index) =>
+                        <span
+                            key={`correct-${id}`}
+                            dangerouslySetInnerHTML={{ __html: `${index ? ', ' : ''}${path(['label'], find(propEq('id', id), options))}` }} />
+                    )}
                 </div>
             }
         </div>;

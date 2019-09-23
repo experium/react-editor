@@ -4,7 +4,7 @@ import { Input } from 'antd';
 import Player from 'react-player';
 import cx from 'classnames';
 
-import withElementWrapper from '../../hocs/withElementWrapper';
+import { withElementWrapper } from '../../hocs/withElementWrapper';
 import styles from '../../css/video.scss';
 
 export class Video extends Component {

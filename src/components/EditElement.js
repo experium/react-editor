@@ -50,36 +50,36 @@ class EditElement extends Component {
                 initialValues={item}
                 mutators={arrayMutators}
                 render={({ handleSubmit, values }) =>
-                <div className={cx(styles.editor, 'edit-element')}>
-                    <div className={cx(styles.editorCol, 'edit-element-col')}>
-                        <FormComponent onSubmit={handleSubmit}>
-                            { fields.map(item =>
-                                item.fieldArray ?
-                                    <FieldArray
-                                        key={`field-${item.prop}`}
-                                        name={item.prop}
-                                        component={FIELDS[item.type]}
-                                        label={item.label}
-                                        variantPlaceholder={placeholder}
-                                        {...(item.props || {})} /> :
-                                    <Field
-                                        key={`field-${item.prop}`}
-                                        name={item.prop}
-                                        component={FIELDS[item.type]}
-                                        label={item.label}
-                                        placeholder={placeholder}
-                                        {...(item.props || {})} />
-                            )}
-                            <Button type='primary' htmlType='submit'>
+                    <div className={cx(styles.editor, 'edit-element')}>
+                        <div className={cx(styles.editorCol, 'edit-element-col')}>
+                            <FormComponent onSubmit={handleSubmit}>
+                                { fields.map(item =>
+                                    item.fieldArray ?
+                                        <FieldArray
+                                            key={`field-${item.prop}`}
+                                            name={item.prop}
+                                            component={FIELDS[item.type]}
+                                            label={item.label}
+                                            variantPlaceholder={placeholder}
+                                            {...(item.props || {})} /> :
+                                        <Field
+                                            key={`field-${item.prop}`}
+                                            name={item.prop}
+                                            component={FIELDS[item.type]}
+                                            label={item.label}
+                                            placeholder={placeholder}
+                                            {...(item.props || {})} />
+                                )}
+                                <Button type='primary' htmlType='submit'>
                                 Сохранить
-                            </Button>
-                        </FormComponent>
+                                </Button>
+                            </FormComponent>
+                        </div>
+                        <div className={cx(styles.editorPreviewCol, 'edit-element-preview-col')}>
+                            { this.renderPreview(values) }
+                        </div>
                     </div>
-                    <div className={cx(styles.editorPreviewCol, 'edit-element-preview-col')}>
-                        { this.renderPreview(values) }
-                    </div>
-                </div>
-        } />
+                } />
         </div>;
     }
 }

@@ -9,7 +9,7 @@ import styles from '../css/sortableRow.scss';
 import EditModalContext from '../contexts/EditModalContext';
 import withComponentsContext from './withComponentsContext';
 
-export default WrappedComponent => {
+export const withElementWrapper = WrappedComponent => {
     class ElementWrapper extends Component {
         static propTypes = {
             removeItem: PropTypes.func,
