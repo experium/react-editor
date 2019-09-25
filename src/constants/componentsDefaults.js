@@ -162,7 +162,11 @@ const COMPONENTS_DEFAULTS = placeholder => ([
         component: Pdf,
         formComponent: PdfComponent,
         staticContent: true,
+        props: {
+            label: 'PDF-презентация'
+        },
         fields: [
+            { type: 'editor', label: 'Название поля', prop: 'label', props: { short: true }},
             { type: 'uploader', label: 'Файл', prop: 'file', props: { accept: '.pdf' }},
             { type: 'input', label: 'Ширина', prop: 'width', props: { number: true }}
         ]

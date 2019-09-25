@@ -21,8 +21,12 @@ export class PdfComponent extends Component {
 
     next = () => this.setState(prev => ({ pageNumber: prev.pageNumber + 1 }));
 
+    getWidth = () => {
+        return this.props.width || (this.pageRef ? this.pageRef.ref.clientWidth : 450);
+    }
+
     renderPdf = () => {
-        const { file, width } = this.props;
+        const { file } = this.props;
         const fileUrl = file.id ? downloadUrl(file.id) : file.body;
         const { pageNumber, numPages } = this.state;
 
@@ -36,7 +40,7 @@ export class PdfComponent extends Component {
             <Document
                 file={fileUrl}
                 onLoadSuccess={this.onLoadSuccess}>
-                <Page pageNumber={pageNumber} width={width || 450} />
+                <Page ref={node => this.pageRef = node} pageNumber={pageNumber} width={this.getWidth()} />
             </Document>
             <div className={cx(styles.pdfFooter, 'pdf-footer')}>
                 { pageNumber } / { numPages }
@@ -45,9 +49,12 @@ export class PdfComponent extends Component {
     }
 
     render() {
-        const { file } = this.props;
+        const { file, label } = this.props;
 
-        return file ? this.renderPdf() : null;
+        return <Fragment>
+            <div dangerouslySetInnerHTML={{ __html: label }} />
+            { file ? this.renderPdf() : null }
+        </Fragment>;
     }
 }
 
