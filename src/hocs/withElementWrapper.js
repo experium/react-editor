@@ -6,6 +6,7 @@ import cx from 'classnames';
 
 import EditElement from '../components/EditElement';
 import styles from '../css/sortableRow.scss';
+import editorStyles from '../css/editor.scss';
 import EditModalContext from '../contexts/EditModalContext';
 import withComponentsContext from './withComponentsContext';
 
@@ -53,7 +54,7 @@ export const withElementWrapper = WrappedComponent => {
         }
 
         render() {
-            const { removeItem, id, type, dragHandleProps, placeholder, simpleView, item, components } = this.props;
+            const { removeItem, id, type, dragHandleProps, placeholder, simpleView, item, components, onCancel } = this.props;
             const { staticContent, ableCorrect, renderInfo, name, icon } = find(propEq('type', type), components);
 
             return <div className={cx(styles.sortableRowWrapper, 'sortable-row-wrapper')}>
@@ -91,7 +92,7 @@ export const withElementWrapper = WrappedComponent => {
                 <EditModalContext.Consumer>
                     { ({ opened, setOpened }) =>
                         <Modal
-                            className='react-form-builder-element-modal'
+                            className={cx(editorStyles.editorModal, 'react-form-builder-element-modal')}
                             title={name}
                             visible={id === opened}
                             onCancel={() => setOpened(null)}
@@ -101,6 +102,7 @@ export const withElementWrapper = WrappedComponent => {
                             <EditElement
                                 item={item}
                                 placeholder={placeholder}
+                                onCancel={() => setOpened(null)}
                                 onSubmit={values => {
                                     this.onSubmit(values);
                                     setOpened(null);

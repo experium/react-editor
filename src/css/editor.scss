@@ -5,13 +5,14 @@
 
 .editorCol {
     width: 50%;
-    padding-right: 15px;
     border-right: 1px solid #e8e8e8;
 }
 
 .editorPreviewCol {
     width: 50%;
-    padding-left: 15px;
+    padding: 15px;
+    max-height: calc(100vh - 154px);
+    overflow-y: auto;
 }
 
 .editorCol p,
@@ -22,4 +23,28 @@
 .editorField {
     padding: 10px;
     border: 1px solid #e8e8e8;
+}
+
+.editorModal {
+    top: 50px !important;
+    :global {
+        .ant-modal-body {
+            max-height: calc(100vh - 154px);
+            overflow: hidden;
+            padding: 0;
+        }
+    }
+}
+
+.editorFooter {
+    border-top: 1px solid #e8e8e8;
+    padding: 15px;
+    width: 100%;
+    background: #fff;
+}
+
+.editorFields {
+    padding: 15px;
+    max-height: calc(100vh - 216px);
+    overflow-y: auto;
 }
