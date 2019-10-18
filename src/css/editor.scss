@@ -6,6 +6,11 @@
 .editorCol {
     width: 50%;
     border-right: 1px solid #e8e8e8;
+    :global {
+        .ant-form {
+            height: 100%;
+        }
+    }
 }
 
 .editorPreviewCol {
@@ -47,4 +52,5 @@
     padding: 15px;
     max-height: calc(100vh - 216px);
     overflow-y: auto;
+    height: calc(100% - 62px);
 }
