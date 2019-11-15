@@ -6,7 +6,8 @@ import withFileUrlContext from '../../hocs/withFileUrlContext';
 
 class Uploader extends Component {
     state = {
-        error: false
+        error: false,
+        uploading: false
     };
 
     reader = new FileReader();
@@ -25,12 +26,15 @@ class Uploader extends Component {
         const { status, response, name } = info.file;
 
         switch (status) {
+            case 'uploading':
+                this.setState({ uploading: true });
+                break;
             case 'done':
                 this.props.onChange({ id: response.id, name });
-                this.state.error && this.setState({ error: false });
+                this.state.error && this.setState({ error: false, uploading: false });
                 break;
             case 'error':
-                this.setState({ error: true });
+                this.setState({ error: true, uploading: false });
                 break;
             default:
                 return;
@@ -59,9 +63,10 @@ class Uploader extends Component {
                 <Upload
                     {...props}
                     accept={accept}
-                    showUploadList={false}>
-                    <Button>
-                        <Icon type='upload' /> Загрузить файл
+                    showUploadList={false}
+                    disabled={this.state.uploading}>
+                    <Button loading={this.state.uploading} icon='upload'>
+                        Загрузить файл
                     </Button>
                 </Upload>
                 { this.state.error && <div style={{ color: 'red' }}>Не удалось загрузить файл</div> }
