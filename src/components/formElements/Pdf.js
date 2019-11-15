@@ -9,7 +9,7 @@ import styles from '../../css/pdf.scss';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-export class PdfComponent extends Component {
+class PdfField extends Component {
     state = {
         numPages: null,
         pageNumber: 1
@@ -58,4 +58,6 @@ export class PdfComponent extends Component {
     }
 }
 
-export default withElementWrapper(withFileUrlContext(PdfComponent));
+export const PdfComponent = withFileUrlContext(PdfField);
+
+export default withElementWrapper(PdfComponent);
