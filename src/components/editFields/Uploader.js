@@ -22,16 +22,18 @@ class Uploader extends Component {
     }
 
     onChange = info => {
-        switch (info.file.status) {
+        const { status, response, name } = info.file;
+
+        switch (status) {
             case 'done':
-                this.props.onChange({ id: info.file.response.id, name: info.file.name });
+                this.props.onChange({ id: response.id, name });
                 this.state.error && this.setState({ error: false });
                 break;
             case 'error':
                 this.setState({ error: true });
                 break;
             default:
-                break;
+                return;
         }
     }
 
@@ -54,12 +56,15 @@ class Uploader extends Component {
                 </Button>
             </Fragment> :
             <Fragment>
-                <Upload {...props} fileList={[]} accept={accept}>
+                <Upload
+                    {...props}
+                    accept={accept}
+                    showUploadList={false}>
                     <Button>
                         <Icon type='upload' /> Загрузить файл
                     </Button>
                 </Upload>
-                { this.state.error && <span style={{ color: 'red' }}>Не удалось загрузить файл</span> }
+                { this.state.error && <div style={{ color: 'red' }}>Не удалось загрузить файл</div> }
             </Fragment>;
     }
 }
