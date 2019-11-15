@@ -109,7 +109,12 @@ class FormBuilderComponent extends Component {
                     width='100%'
                     style={{ maxWidth: 1000 }}
                     footer={null}>
-                    <FormGenerator data={{ items, elements, common: commonSettings }} components={components} preview />
+                    <FormGenerator
+                        data={{ items, elements, common: commonSettings }}
+                        components={components}
+                        uploadUrl={uploadUrl}
+                        downloadUrl={downloadUrl}
+                        preview />
                 </Modal>
                 <Modal
                     title='Настройки'
