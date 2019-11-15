@@ -26,7 +26,7 @@ export class PdfComponent extends Component {
     }
 
     renderPdf = () => {
-        const { file } = this.props;
+        const { file, downloadUrl } = this.props;
         const fileUrl = file.id ? downloadUrl(file.id) : file.body;
         const { pageNumber, numPages } = this.state;
 
