@@ -7,6 +7,30 @@ import cx from 'classnames';
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import styles from '../../css/video.scss';
 
+class VideoPlayer extends Component {
+    state = {
+        minWidth: 0
+    };
+
+    componentDidMount() {
+        const minWidth = this.container.clientWidth;
+
+        this.setState({
+            minWidth,
+            minHeight: (100 * minWidth / this.props.width) * this.props.height / 100
+        });
+    }
+
+    render() {
+        const { isDraggingOver, width, height, src } = this.props;
+        const useMinSizes = width > this.state.minWidth;
+
+        return <div className={cx({ 'dragging-over': isDraggingOver })} style={{ marginBottom: 15 }} ref={node => this.container = node}>
+            <Player url={src} width={useMinSizes ? this.state.minWidth : width} height={useMinSizes ? this.state.minHeight : height} />
+        </div>;
+    }
+}
+
 export class Video extends Component {
     static propTypes = {
         src: PropTypes.string,
@@ -32,10 +56,7 @@ export class Video extends Component {
                     onChange={this.onChange}
                     placeholder='Вставьте ссылку на видео с youtube' />
             }
-            { src ?
-                <div className={cx(styles.videoWrapper, 'video-wrapper', { 'dragging-over': isDraggingOver })}>
-                    <Player url={src} width={width} height={height} />
-                </div> : null
+            { src ? <VideoPlayer isDraggingOver={isDraggingOver} width={width} height={height} src={src} /> : null
             }
         </div>;
     }
