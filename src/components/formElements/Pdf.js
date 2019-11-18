@@ -1,13 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import cx from 'classnames';
+import { pathOr } from 'ramda';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFileUrlContext from '../../hocs/withFileUrlContext';
 import styles from '../../css/pdf.scss';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+const Spinner = () =>
+    <div className={cx(styles.pdfSpin, 'pdf-spin')}>
+        <Spin />
+    </div>;
 
 class PdfField extends Component {
     state = {
@@ -37,11 +43,19 @@ class PdfField extends Component {
                     <Button icon='right' onClick={this.next} disabled={pageNumber >= numPages} />
                 </Button.Group>
             </div>
-            <Document
-                file={fileUrl}
-                onLoadSuccess={this.onLoadSuccess}>
-                <Page ref={node => this.pageRef = node} pageNumber={pageNumber} width={this.getWidth()} />
-            </Document>
+            <div style={{ minHeight: pathOr(0, ['ref', 'clientHeight'], this.pageRef) }}>
+                <Document
+                    ref={node => this.pdf = node}
+                    file={fileUrl}
+                    onLoadSuccess={this.onLoadSuccess}
+                    loading={<Spinner />}>
+                    <Page
+                        ref={node => this.pageRef = node}
+                        pageNumber={pageNumber}
+                        width={this.getWidth()}
+                        loading={<Spinner />} />
+                </Document>
+            </div>
             <div className={cx(styles.pdfFooter, 'pdf-footer')}>
                 { pageNumber } / { numPages }
             </div>
