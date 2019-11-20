@@ -22,3 +22,18 @@
 .pdfSpin {
     text-align: center;
 }
+
+.pdfFullView {
+    top: 0 !important;
+    padding-bottom: 0 !important;
+    :global {
+        .ant-modal-content {
+            height: 100vh;
+            border-radius: 0;
+        }
+        .ant-modal-body {
+            padding: 0;
+            height: calc(100% - 53px);
+        }
+    }
+}

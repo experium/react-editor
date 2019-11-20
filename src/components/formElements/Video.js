@@ -26,7 +26,7 @@ class VideoPlayer extends Component {
         const useMinSizes = width > this.state.minWidth;
 
         return <div className={cx({ 'dragging-over': isDraggingOver })} style={{ marginBottom: 15 }} ref={node => this.container = node}>
-            <Player url={src} width={useMinSizes ? this.state.minWidth : width} height={useMinSizes ? this.state.minHeight : height} />
+            <Player url={src} width={useMinSizes ? this.state.minWidth : width} height={useMinSizes ? this.state.minHeight : height} controls />
         </div>;
     }
 }

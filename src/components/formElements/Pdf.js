@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { Button, Spin } from 'antd';
+import { Button, Spin, Modal } from 'antd';
 import cx from 'classnames';
 import { pathOr } from 'ramda';
 
@@ -18,7 +18,8 @@ const Spinner = () =>
 class PdfField extends Component {
     state = {
         numPages: null,
-        pageNumber: 1
+        pageNumber: 1,
+        fullScreen: false
     };
 
     onLoadSuccess = ({ numPages }) => this.setState({ numPages, pageNumber: 1 });
@@ -31,6 +32,14 @@ class PdfField extends Component {
         return this.props.width || (this.pageRef ? this.pageRef.ref.clientWidth : 450);
     }
 
+    openFullPdf = () => {
+        this.setState({ fullScreen: true });
+    }
+
+    closeFullPdf = () => {
+        this.setState({ fullScreen: false });
+    }
+
     renderPdf = () => {
         const { file, downloadUrl } = this.props;
         const fileUrl = file.id ? downloadUrl(file.id) : file.body;
@@ -41,6 +50,7 @@ class PdfField extends Component {
                 <Button.Group>
                     <Button icon='left' onClick={this.back} disabled={pageNumber < 2} />
                     <Button icon='right' onClick={this.next} disabled={pageNumber >= numPages} />
+                    <Button icon='fullscreen' onClick={this.openFullPdf} />
                 </Button.Group>
             </div>
             <div style={{ minHeight: pathOr(0, ['ref', 'clientHeight'], this.pageRef) }}>
@@ -55,6 +65,15 @@ class PdfField extends Component {
                         width={this.getWidth()}
                         loading={<Spinner />} />
                 </Document>
+                <Modal
+                    className={cx(styles.pdfFullView, 'pdf-fullview')}
+                    visible={this.state.fullScreen}
+                    closable={false}
+                    footer={<Button onClick={this.closeFullPdf}>Закрыть</Button>}
+                    width='100%'
+                    destroyOnClose>
+                    <iframe height='100%' width='100%' scrolling='no' frameBorder="0" src={fileUrl}></iframe>
+                </Modal>
             </div>
             <div className={cx(styles.pdfFooter, 'pdf-footer')}>
                 { pageNumber } / { numPages }
