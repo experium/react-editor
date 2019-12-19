@@ -11,6 +11,7 @@ import Video, { Video as VideoComponent } from '../components/formElements/Video
 import File, { FileField } from '../components/formElements/File';
 import DownloadFile, { DownloadFile as DownloadFileComponent } from '../components/formElements/DownloadFile';
 import Pdf, { PdfComponent } from '../components/formElements/Pdf';
+import Image, { ImageComponent } from '../components/formElements/Image';
 
 const renderInfo = (prop = 'label') => props => <div dangerouslySetInnerHTML={{ __html: props[prop] }} />;
 
@@ -169,6 +170,19 @@ const COMPONENTS_DEFAULTS = placeholder => ([
             { type: 'editor', label: 'Название поля', prop: 'label', props: { short: true }},
             { type: 'uploader', label: 'Файл', prop: 'file', props: { accept: '.pdf' }},
             { type: 'input', label: 'Ширина', prop: 'width', props: { number: true }}
+        ]
+    },
+    {
+        type: 'Image',
+        name: 'Изображение',
+        icon: 'picture-o',
+        component: Image,
+        formComponent: ImageComponent,
+        staticContent: true,
+        fields: [
+            { type: 'uploader', label: 'Изображение', prop: 'url', props: { withoutUrl: true, accept: 'image/*' }},
+            { type: 'switch', label: 'Растянуть на всю ширину', prop: 'cover' },
+            { type: 'switch', label: 'Повторять по горизонтали', prop: 'repeat' }
         ]
     }
 ]);
