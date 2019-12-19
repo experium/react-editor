@@ -3,7 +3,6 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { Button, Spin, Modal } from 'antd';
 import cx from 'classnames';
 import { pathOr } from 'ramda';
-import PdfViewer from 'pdfjs-viewer-react';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFileUrlContext from '../../hocs/withFileUrlContext';
@@ -54,8 +53,6 @@ class PdfField extends Component {
                     <Button icon='fullscreen' onClick={this.openFullPdf} />
                 </Button.Group>
             </div>
-            <iframe src={`/pdf-viewer/viewer.html?file=${fileUrl}`} width='100%' height='100%' />
-            {/* <PdfViewer file={fileUrl} width="333px" height="532px"></PdfViewer> */}
             <div style={{ minHeight: pathOr(0, ['ref', 'clientHeight'], this.pageRef) }}>
                 <Document
                     ref={node => this.pdf = node}

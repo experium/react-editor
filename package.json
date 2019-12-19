@@ -1,7 +1,7 @@
 {
   "name": "@experium/react-editor",
   "main": "./lib/index.js",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "publishConfig": {
     "access": "public"
   },
@@ -23,9 +23,6 @@
     "final-form": "^4.18.5",
     "final-form-arrays": "^3.0.1",
     "font-awesome": "^4.7.0",
-    "pdfjs-dist": "^2.2.228",
-    "pdfjs-viewer": "^1.0.0",
-    "pdfjs-viewer-react": "^2.0.943",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react": "^16.9.0",

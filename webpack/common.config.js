@@ -70,11 +70,6 @@ module.exports = {
                 to: 'index.html'
             },
             {
-                from: 'node_modules/pdfjs-dist/web',
-                to: 'pdf-viewer',
-                toType: 'dir'
-            },
-            {
                 from: 'src/ru.js',
                 to: 'translations'
             }
