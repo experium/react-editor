@@ -5,6 +5,7 @@ import { Form as FormComponent, Button, Popconfirm } from 'antd';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import cx from 'classnames';
+import { createGlobalStyle } from 'styled-components';
 
 import styles from '../css/editor.scss';
 import formBuilderStyles from '../css/formBuilder.scss';
@@ -23,6 +24,15 @@ const FIELDS = {
     switch: Switch,
     uploader: Uploader
 };
+
+const GlobalStyle = createGlobalStyle`
+    .tox-notifications-container {
+        display: none;
+    }
+    .tox-tinymce-inline {
+        z-index: 1000;
+    }
+`;
 
 class EditElement extends Component {
     renderPreview = item => {
@@ -45,6 +55,7 @@ class EditElement extends Component {
         const { fields = [] } = find(propEq('type', item.type), components);
 
         return <div className={cx(formBuilderStyles.experiumPlayerBuilder, 'experium-player-builder')}>
+            <GlobalStyle />
             <Form
                 onSubmit={onSubmit}
                 initialValues={item}
