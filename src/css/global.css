@@ -1,0 +1,7 @@
+.tox-notifications-container {
+    display: none;
+}
+
+.tox-tinymce-inline {
+    z-index: 1000;
+}

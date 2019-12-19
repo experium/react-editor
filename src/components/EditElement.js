@@ -10,14 +10,14 @@ import styles from '../css/editor.scss';
 import formBuilderStyles from '../css/formBuilder.scss';
 import FormField from './FormField';
 import Input from './editFields/Input';
-import Editor from './editFields/Editor';
+import MceEditor from './editFields/MceEditor';
 import Multiple from './editFields/Multiple';
 import Switch from './editFields/Switch';
 import withComponentsContext from '../hocs/withComponentsContext';
 import Uploader from './editFields/Uploader';
 
 const FIELDS = {
-    editor: Editor,
+    editor: MceEditor,
     input: Input,
     multiple: Multiple,
     switch: Switch,

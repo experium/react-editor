@@ -5,9 +5,9 @@ import uniqid from 'uniqid';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import cx from 'classnames';
 
-import Editor from './Editor';
 import ImageUploader from './ImageUploader';
 import styles from '../../css/multipleField.scss';
+import MceEditor from './MceEditor';
 
 export default class Multiple extends Component {
     addItem = () => {
@@ -49,7 +49,7 @@ export default class Multiple extends Component {
                                                 <div className={cx(styles.itemContent, 'multiple-field-item-content')}>
                                                     <Field
                                                         name={`${name}.label`}
-                                                        component={Editor}
+                                                        component={MceEditor}
                                                         short />
                                                     <Field
                                                         name={`${name}.image`}

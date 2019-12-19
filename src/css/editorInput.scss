@@ -1,0 +1,29 @@
+.editorInput {
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    padding: 7px 10px;
+    min-height: 80px;
+    :global {
+        .mce-content-body {
+            min-height: 70px;
+            * {
+                line-height: 20px;
+            }
+        }
+        .mce-edit-focus {
+            outline: none;
+        }
+        p {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.editorInputShort {
+    min-height: auto;
+    :global {
+        .mce-content-body {
+            min-height: auto;
+        }
+    }
+}
