@@ -13,6 +13,7 @@ import { reorder } from '../utils/dnd';
 import styles from '../css/formBuilder.scss';
 import Settings from './Settings';
 import FileUrlContext from '../contexts/FileUrlContext';
+import MceLanguageUrl from '../contexts/MceLanguageUrl';
 
 class FormBuilderComponent extends Component {
     static propTypes = {
@@ -72,7 +73,7 @@ class FormBuilderComponent extends Component {
     }
 
     render() {
-        const { items, elements, addItem, components, commonSettings, uploadUrl, downloadUrl } = this.props;
+        const { items, elements, addItem, components, commonSettings, uploadUrl, downloadUrl, mceLanguageUrl } = this.props;
 
         return <div className={cx(styles.experiumPlayerBuilder, 'experium-player-builder')}>
             <div className={cx(styles.reactFormBuilder, 'react-form-builder clearfix')}>
@@ -95,10 +96,12 @@ class FormBuilderComponent extends Component {
                     uploadUrl,
                     downloadUrl
                 }}>
-                    <DragDropContext onDragEnd={this.onDragEnd}>
-                        <Container {...this.props} />
-                        <Toolbar addItem={addItem} />
-                    </DragDropContext>
+                    <MceLanguageUrl.Provider value={mceLanguageUrl}>
+                        <DragDropContext onDragEnd={this.onDragEnd}>
+                            <Container {...this.props} />
+                            <Toolbar addItem={addItem} />
+                        </DragDropContext>
+                    </MceLanguageUrl.Provider>
                 </FileUrlContext.Provider>
                 <Modal
                     className='react-form-builder-preview-modal'
