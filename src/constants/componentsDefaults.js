@@ -27,6 +27,7 @@ const COMPONENTS_DEFAULTS = placeholder => ([
             content: '<p><br></p>'
         },
         staticContent: true,
+        hidePreview: true,
         fields: [
             { type: 'editor', label: 'Текст', prop: 'content' }
         ]

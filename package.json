@@ -1,7 +1,7 @@
 {
   "name": "@experium/react-editor",
   "main": "./lib/index.js",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "publishConfig": {
     "access": "public"
   },

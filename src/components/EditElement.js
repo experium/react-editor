@@ -52,7 +52,7 @@ class EditElement extends Component {
 
     render() {
         const { item, placeholder, onSubmit, components, onCancel } = this.props;
-        const { fields = [] } = find(propEq('type', item.type), components);
+        const { fields = [], hidePreview } = find(propEq('type', item.type), components);
 
         return <div className={cx(formBuilderStyles.experiumPlayerBuilder, 'experium-player-builder')}>
             <GlobalStyle />
@@ -62,7 +62,7 @@ class EditElement extends Component {
                 mutators={arrayMutators}
                 render={({ handleSubmit, values }) =>
                     <div className={cx(styles.editor, item.type, 'edit-element')}>
-                        <div className={cx(styles.editorCol, 'edit-element-col')}>
+                        <div className={cx(styles.editorCol, 'edit-element-col', { [styles.editorColHidePreview]: hidePreview })}>
                             <FormComponent onSubmit={handleSubmit}>
                                 <div className={cx(styles.editorFields, 'edit-element-fields')}>
                                     { fields.map(item =>
@@ -80,7 +80,8 @@ class EditElement extends Component {
                                                 component={FIELDS[item.type]}
                                                 label={item.label}
                                                 placeholder={placeholder}
-                                                {...(item.props || {})} />
+                                                {...(item.props || {})}
+                                                hidePreview={hidePreview} />
                                     )}
                                 </div>
                                 <div className={cx(styles.editorFooter, 'edit-element-footer')}>
@@ -101,9 +102,11 @@ class EditElement extends Component {
                                 </div>
                             </FormComponent>
                         </div>
-                        <div className={cx(styles.editorPreviewCol, 'edit-element-preview-col')}>
-                            { this.renderPreview(values) }
-                        </div>
+                        { !hidePreview &&
+                            <div className={cx(styles.editorPreviewCol, 'edit-element-preview-col')}>
+                                { this.renderPreview(values) }
+                            </div>
+                        }
                     </div>
                 } />
         </div>;
