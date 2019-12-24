@@ -22,17 +22,17 @@ class MceEditor extends Component {
                             menubar: false,
                             language: 'ru',
                             branding: false,
-                            content_style: `
-                                * { color: rgba(0, 0, 0, 0.65); font-size: 14px; }
-                                div { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' }
+                            content_style: hidePreview ? `
+                                div { color: rgba(0, 0, 0, 0.65); font-size: 14px; color: rgba(0, 0, 0, 0.65); font-size: 14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' }
                                 h1 { font-size: 28px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
                                 h2 { font-size: 21px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
                                 h3 { font-size: 16.38px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
                                 h4 { font-size: 14px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
                                 h5 { font-size: 11.62px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
                                 h6 { font-size: 9.38px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
-                                p { margin-top: 0; margin-bottom: 1em; }
-                            `,
+                                p { margin-top: 0; margin-bottom: 1em; color: rgba(0, 0, 0, 0.65); font-size: 14px; }
+                                ol, li, ul, span { color: rgba(0, 0, 0, 0.65); font-size: 14px; }
+                            ` : null,
                             language_url: languageUrl || '/translations/ru.js',
                             toolbar: short ?
                                 'undo redo | bold italic underline | forecolor backcolor | link | removeformat' :
