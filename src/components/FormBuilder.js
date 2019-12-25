@@ -104,7 +104,7 @@ class FormBuilderComponent extends Component {
                     </MceLanguageUrl.Provider>
                 </FileUrlContext.Provider>
                 <Modal
-                    className='react-form-builder-preview-modal'
+                    className={cx(styles.reactFormBuilderPreviewModal, 'react-form-builder-preview-modal')}
                     title='Предпросмотр'
                     visible={this.state.preview}
                     onCancel={this.closePreview}

@@ -3,6 +3,7 @@ import { Form, Field } from 'react-final-form';
 import { Form as FormComponent, Button } from 'antd';
 
 import Switch from './editFields/Switch';
+import ColorPicker from './editFields/ColorPicker';
 
 export default class Settings extends Component {
     render() {
@@ -21,6 +22,10 @@ export default class Settings extends Component {
                         name='pages'
                         component={Switch}
                         label='Выводить каждый вопрос на отдельной странице' />
+                    <Field
+                        name='pageColor'
+                        component={ColorPicker}
+                        label='Цвет страницы' />
                     <Button
                         type='primary'
                         htmlType='submit'>

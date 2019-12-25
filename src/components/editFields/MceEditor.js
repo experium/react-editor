@@ -18,7 +18,7 @@ class MceEditor extends Component {
                         onEditorChange={onChange}
                         inline={!hidePreview}
                         init={{
-                            plugins: 'image lists link',
+                            plugins: 'image lists link table',
                             menubar: false,
                             language: 'ru',
                             branding: false,
@@ -34,9 +34,10 @@ class MceEditor extends Component {
                                 ol, li, ul, span { color: rgba(0, 0, 0, 0.65); font-size: 14px; }
                             ` : null,
                             language_url: languageUrl || '/translations/ru.js',
+                            toolbar_drawer: 'sliding',
                             toolbar: short ?
                                 'undo redo | bold italic underline | forecolor backcolor | link | removeformat' :
-                                'undo redo | formatselect | fontsizeselect | bold italic underline | forecolor backcolor | bullist numlist | image | link | removeformat',
+                                'undo redo | formatselect | fontselect fontsizeselect | bold italic underline |  alignleft aligncenter alignright alignjustify | forecolor backcolor | bullist numlist | image | link | table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol | removeformat',
                             images_upload_handler: (info, success) => {
                                 const fr = new FileReader();
 

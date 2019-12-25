@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { Button, Spin, Modal } from 'antd';
 import cx from 'classnames';
-import { pathOr } from 'ramda';
+import { pathOr, range, filter } from 'ramda';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFileUrlContext from '../../hocs/withFileUrlContext';
@@ -40,10 +40,18 @@ class PdfField extends Component {
         this.setState({ fullScreen: false });
     }
 
+    getPages = () => {
+        const { pageNumber, numPages } = this.state;
+        const pages = range(pageNumber - 2, pageNumber + 3);
+
+        return filter(num => num > 0 && num < numPages + 1, pages);
+    }
+
     renderPdf = () => {
         const { file, downloadUrl } = this.props;
         const fileUrl = file.id ? downloadUrl(file.id) : file.body;
         const { pageNumber, numPages } = this.state;
+        const pages = this.getPages();
 
         return <div className={cx(styles.pdf, 'pdf-component')}>
             <div className={cx(styles.pdfPageButtons, 'pdf-page-buttons')}>
@@ -59,11 +67,15 @@ class PdfField extends Component {
                     file={fileUrl}
                     onLoadSuccess={this.onLoadSuccess}
                     loading={<Spinner />}>
-                    <Page
-                        ref={node => this.pageRef = node}
-                        pageNumber={pageNumber}
-                        width={this.getWidth()}
-                        loading={<Spinner />} />
+                    { pages.map(p =>
+                        <div key={`page-${p}`} style={{ display: p === pageNumber ? 'block' : 'none' }}>
+                            <Page
+                                ref={p === pageNumber ? (node => this.pageRef = node) : null}
+                                pageNumber={p}
+                                width={this.getWidth()}
+                                loading={<Spinner />} />
+                        </div>
+                    )}
                 </Document>
                 <Modal
                     className={cx(styles.pdfFullView, 'pdf-fullview')}
