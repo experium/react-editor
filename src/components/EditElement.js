@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { find, propEq } from 'ramda';
+import { find, propEq, path } from 'ramda';
 import { Form, Field } from 'react-final-form';
 import { Form as FormComponent, Button, Popconfirm } from 'antd';
 import arrayMutators from 'final-form-arrays';
@@ -67,8 +67,8 @@ class EditElement extends Component {
                         <div className={cx(styles.editorCol, 'edit-element-col', { [styles.editorColHidePreview]: hidePreview })}>
                             <FormComponent onSubmit={handleSubmit}>
                                 <div className={cx(styles.editorFields, 'edit-element-fields')}>
-                                    { fields.map(item =>
-                                        item.fieldArray ?
+                                    { fields.map(item => (path(['props', 'cond'], item) ? item.props.cond(values) : true) &&
+                                        (item.fieldArray ?
                                             <FieldArray
                                                 key={`field-${item.prop}`}
                                                 name={item.prop}
@@ -83,7 +83,7 @@ class EditElement extends Component {
                                                 label={item.label}
                                                 placeholder={placeholder}
                                                 {...(item.props || {})}
-                                                hidePreview={hidePreview} />
+                                                hidePreview={hidePreview} />)
                                     )}
                                 </div>
                                 <div className={cx(styles.editorFooter, 'edit-element-footer')}>
