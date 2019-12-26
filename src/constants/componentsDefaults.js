@@ -170,7 +170,8 @@ const COMPONENTS_DEFAULTS = placeholder => ([
         fields: [
             { type: 'editor', label: 'Название поля', prop: 'label', props: { short: true }},
             { type: 'uploader', label: 'Файл', prop: 'file', props: { accept: '.pdf' }},
-            { type: 'input', label: 'Ширина', prop: 'width', props: { number: true }}
+            { type: 'input', label: 'Ширина', prop: 'width', props: { number: true }},
+            { type: 'switch', label: 'Выводить все страницы', prop: 'allPages' }
         ]
     },
     {

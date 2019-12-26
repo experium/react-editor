@@ -19,10 +19,17 @@ class PdfField extends Component {
     state = {
         numPages: null,
         pageNumber: 1,
-        fullScreen: false
+        fullScreen: false,
+        loaded: false
     };
 
-    onLoadSuccess = ({ numPages }) => this.setState({ numPages, pageNumber: 1 });
+    componentDidUpdate(prev) {
+        if (this.props.file && !prev.file) {
+            this.setState({ loaded: false });
+        }
+    }
+
+    onLoadSuccess = ({ numPages }) => this.setState({ numPages, pageNumber: 1, loaded: true });
 
     back = () => this.setState(prev => ({ pageNumber: prev.pageNumber - 1 }));
 
@@ -44,20 +51,24 @@ class PdfField extends Component {
         const { pageNumber, numPages } = this.state;
         const pages = range(pageNumber - 2, pageNumber + 3);
 
-        return filter(num => num > 0 && num < numPages + 1, pages);
+        return this.props.allPages ? range(1, numPages + 1) : filter(num => num > 0 && num < numPages + 1, pages);
     }
 
     renderPdf = () => {
-        const { file, downloadUrl } = this.props;
+        const { file, downloadUrl, allPages } = this.props;
         const fileUrl = file.id ? downloadUrl(file.id) : file.body;
-        const { pageNumber, numPages } = this.state;
+        const { pageNumber, numPages, loaded } = this.state;
         const pages = this.getPages();
 
         return <div className={cx(styles.pdf, 'pdf-component')}>
             <div className={cx(styles.pdfPageButtons, 'pdf-page-buttons')}>
                 <Button.Group>
-                    <Button icon='left' onClick={this.back} disabled={pageNumber < 2} />
-                    <Button icon='right' onClick={this.next} disabled={pageNumber >= numPages} />
+                    { !allPages &&
+                        <Fragment>
+                            <Button icon='left' onClick={this.back} disabled={pageNumber < 2} />
+                            <Button icon='right' onClick={this.next} disabled={pageNumber >= numPages} />
+                        </Fragment>
+                    }
                     <Button icon='fullscreen' onClick={this.openFullPdf} />
                 </Button.Group>
             </div>
@@ -68,7 +79,7 @@ class PdfField extends Component {
                     onLoadSuccess={this.onLoadSuccess}
                     loading={<Spinner />}>
                     { pages.map(p =>
-                        <div key={`page-${p}`} style={{ display: p === pageNumber ? 'block' : 'none' }}>
+                        <div key={`page-${p}`} style={{ display: (p === pageNumber || allPages) ? 'block' : 'none' }}>
                             <Page
                                 ref={p === pageNumber ? (node => this.pageRef = node) : null}
                                 pageNumber={p}
@@ -87,9 +98,11 @@ class PdfField extends Component {
                     <iframe height='100%' width='100%' scrolling='no' frameBorder="0" src={fileUrl}></iframe>
                 </Modal>
             </div>
-            <div className={cx(styles.pdfFooter, 'pdf-footer')}>
-                { pageNumber } / { numPages }
-            </div>
+            { !allPages && loaded &&
+                <div className={cx(styles.pdfFooter, 'pdf-footer')}>
+                    { pageNumber } / { numPages }
+                </div>
+            }
         </div>;
     }
 
