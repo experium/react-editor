@@ -18,8 +18,9 @@ class MceEditor extends Component {
                         onEditorChange={onChange}
                         inline={!hidePreview}
                         init={{
-                            plugins: 'image lists link table',
-                            menubar: false,
+                            plugins: 'autoresize image lists link table code',
+                            min_height: 350,
+                            menubar: !short,
                             language: 'ru',
                             branding: false,
                             content_style: hidePreview ? `
@@ -37,7 +38,7 @@ class MceEditor extends Component {
                             toolbar_drawer: 'sliding',
                             toolbar: short ?
                                 'undo redo | bold italic underline | forecolor backcolor | link | removeformat' :
-                                'undo redo | formatselect | fontselect fontsizeselect | bold italic underline |  alignleft aligncenter alignright alignjustify | forecolor backcolor | bullist numlist | image | link | table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol | removeformat',
+                                'formatselect | fontselect | fontsizeselect | bold italic strikethrough underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code | removeformat',
                             images_upload_handler: (info, success) => {
                                 const fr = new FileReader();
 

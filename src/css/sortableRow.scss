@@ -77,12 +77,17 @@
         margin: 0;
         padding: 0;
         display: inline;
-        font-size: 14px;
+        font-size: 14px !important;
+        font-family: inherit !important;
+        color: rgba(0, 0, 0, .65) !important;
+        background-color: transparent !important;
+        text-decoration: none !important;
+        font-weight: 400 !important;
+        font-style: normal !important;
+        padding: 0 !important;
+        pointer-events: none;
     }
-    img, table {
-        display: none;
-    }
-    br {
+    img, table, br {
         display: none;
     }
 }
