@@ -16,13 +16,15 @@ import Multiple from './editFields/Multiple';
 import Switch from './editFields/Switch';
 import withComponentsContext from '../hocs/withComponentsContext';
 import Uploader from './editFields/Uploader';
+import RadioButtons from './editFields/RadioButtons';
 
 const FIELDS = {
     editor: MceEditor,
     input: Input,
     multiple: Multiple,
     switch: Switch,
-    uploader: Uploader
+    uploader: Uploader,
+    radiobuttons: RadioButtons
 };
 
 const GlobalStyle = createGlobalStyle`
