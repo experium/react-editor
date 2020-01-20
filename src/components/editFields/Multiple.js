@@ -10,6 +10,10 @@ import styles from '../../css/multipleField.scss';
 import MceEditor from './MceEditor';
 
 export default class Multiple extends Component {
+    static defaultProps = {
+        image: true
+    };
+
     addItem = () => {
         const { fields, variantPlaceholder } = this.props;
 
@@ -28,7 +32,7 @@ export default class Multiple extends Component {
     }
 
     render() {
-        const { label, fields } = this.props;
+        const { label, fields, image } = this.props;
 
         return <Form.Item
             label={label}>
@@ -51,9 +55,11 @@ export default class Multiple extends Component {
                                                         name={`${name}.label`}
                                                         component={MceEditor}
                                                         short />
-                                                    <Field
-                                                        name={`${name}.image`}
-                                                        component={ImageUploader} />
+                                                    { image &&
+                                                        <Field
+                                                            name={`${name}.image`}
+                                                            component={ImageUploader} />
+                                                    }
                                                     { fields.length > 1 &&
                                                         <Button ghost type='danger' icon='delete' onClick={() => fields.remove(index)} />
                                                     }
