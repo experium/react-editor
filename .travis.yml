@@ -1,5 +1,6 @@
 dist: trusty
 language: node_js
+version: 1.0
 node_js: stable
 
 script:
@@ -14,6 +15,7 @@ jobs:
       - yarn package
       deploy:
         skip_cleanup: true
+        edge: true
         provider: npm
         email: "webdev@experium.ru"
         api_key: "$NPM_API_KEY"
