@@ -8,10 +8,11 @@ import cx from 'classnames';
 import ImageUploader from './ImageUploader';
 import styles from '../../css/multipleField.scss';
 import MceEditor from './MceEditor';
+import Input from './Input';
 
 export default class Multiple extends Component {
     static defaultProps = {
-        image: true
+        editor: true
     };
 
     addItem = () => {
@@ -32,7 +33,7 @@ export default class Multiple extends Component {
     }
 
     render() {
-        const { label, fields, image } = this.props;
+        const { label, fields, editor } = this.props;
 
         return <Form.Item
             label={label}>
@@ -53,9 +54,9 @@ export default class Multiple extends Component {
                                                 <div className={cx(styles.itemContent, 'multiple-field-item-content')}>
                                                     <Field
                                                         name={`${name}.label`}
-                                                        component={MceEditor}
+                                                        component={editor ? MceEditor : Input}
                                                         short />
-                                                    { image &&
+                                                    { editor &&
                                                         <Field
                                                             name={`${name}.image`}
                                                             component={ImageUploader} />
