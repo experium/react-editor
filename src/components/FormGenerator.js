@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, Form as FormComponent } from 'antd';
-import { find, propEq, any, toPairs, concat, filter, addIndex } from 'ramda';
+import { find, propEq, any, toPairs, concat, filter, addIndex, path } from 'ramda';
 import { DragDropContext } from 'react-beautiful-dnd';
 import cx from 'classnames';
 import { Form } from 'react-final-form';
@@ -44,8 +44,11 @@ export class FormGenerator extends Component {
     goNext = () => this.setState(prev => ({ page: prev.page + 1 }));
 
     renderFooter = (staticContent, index, invalid) => {
-        const { data: { common = {}, items }} = this.props;
+        const { data: { common = {}, items, elements }} = this.props;
         const { page } = this.state;
+
+        const components = COMPONENTS_DEFAULTS().concat(this.props.components);
+        const showSubmit = any(([ _, item ]) => !path(['staticContent'], find(propEq('type', item.type), components)), toPairs(elements));
 
         return <Button.Group>
             { common.pages && page > 0 &&
@@ -55,7 +58,7 @@ export class FormGenerator extends Component {
                     Назад
                 </Button>
             }
-            { ((!staticContent && common.everyQuestionSubmit) || (common.pages ? page : index) === items.length - 1) &&
+            { showSubmit && ((!staticContent && common.everyQuestionSubmit) || (common.pages ? page : index) === items.length - 1) &&
                 <Button
                     htmlType='submit'
                     type='primary'>
@@ -73,7 +76,7 @@ export class FormGenerator extends Component {
     }
 
     renderRow = (id, index, invalid) => {
-        const { data: { elements = {}, common = {}, items }, preview, values, view, placeholder } = this.props;
+        const { data: { elements = {} }, preview, values, view, placeholder } = this.props;
         const item = elements[id];
         const { staticContent, fieldType, formComponent: Component } = find(propEq('type', item.type), this.getComponents(placeholder));
 

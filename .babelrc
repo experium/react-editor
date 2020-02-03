@@ -9,6 +9,7 @@
             "preprocessCss": "./cssPreprocess.js",
             "extensions": [".scss"],
             "extractCss": "./lib/main.css"
-        }]
+        }],
+        ["import", { "libraryName": "antd", "style": true }]
     ]
 }
