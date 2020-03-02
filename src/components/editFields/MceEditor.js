@@ -23,16 +23,23 @@ class MceEditor extends Component {
                             menubar: !short,
                             language: 'ru',
                             branding: false,
+                            fontsize_formats: '8px 10px 12px 14px 18px 24px 36px',
                             content_style: hidePreview ? `
+                                ol, li, ul, span { color: rgba(0, 0, 0, 0.65); font-size: 14px; }
                                 div { color: rgba(0, 0, 0, 0.65); font-size: 14px; color: rgba(0, 0, 0, 0.65); font-size: 14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' }
                                 h1 { font-size: 28px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
+                                h1 span { font-size: 28px; color: rgba(0, 0, 0, 0.85); }
                                 h2 { font-size: 21px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
+                                h2 span { font-size: 21px; color: rgba(0, 0, 0, 0.85); }
                                 h3 { font-size: 16.38px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
+                                h3 span { font-size: 16.38px; color: rgba(0, 0, 0, 0.85); }
                                 h4 { font-size: 14px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
+                                h4 span { font-size: 14px; color: rgba(0, 0, 0, 0.85); }
                                 h5 { font-size: 11.62px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
+                                h5 span { font-size: 11.62px; color: rgba(0, 0, 0, 0.85); }
                                 h6 { font-size: 9.38px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
+                                h6 span { font-size: 9.38px; color: rgba(0, 0, 0, 0.85); }
                                 p { margin-top: 0; margin-bottom: 1em; color: rgba(0, 0, 0, 0.65); font-size: 14px; }
-                                ol, li, ul, span { color: rgba(0, 0, 0, 0.65); font-size: 14px; }
                             ` : null,
                             language_url: languageUrl || '/translations/ru.js',
                             toolbar_drawer: 'sliding',
@@ -44,6 +51,11 @@ class MceEditor extends Component {
 
                                 fr.readAsDataURL(info.blob());
                                 fr.onload = () => success(fr.result);
+                            },
+                            setup: editor => {
+                                editor.on('init', ed => {
+                                    ed.target.editorCommands.execCommand('fontName', false, 'Arial');
+                                });
                             }
                         }} />
                 }
