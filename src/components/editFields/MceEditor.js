@@ -18,11 +18,12 @@ class MceEditor extends Component {
                         onEditorChange={onChange}
                         inline={!hidePreview}
                         init={{
-                            plugins: 'autoresize image lists link table code',
+                            plugins: 'autoresize image lists link table code paste',
                             min_height: 350,
                             menubar: !short,
                             language: 'ru',
                             branding: false,
+                            paste_as_text: true,
                             fontsize_formats: '8px 10px 12px 14px 18px 24px 36px',
                             content_style: hidePreview ? `
                                 ol, li, ul, span { color: rgba(0, 0, 0, 0.65); font-size: 14px; }
@@ -41,8 +42,27 @@ class MceEditor extends Component {
                                 h6 span { font-size: 9.38px; color: rgba(0, 0, 0, 0.85); }
                                 p { margin-top: 0; margin-bottom: 1em; color: rgba(0, 0, 0, 0.65); font-size: 14px; }
                             ` : null,
+                            content_css: ['https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic'],
                             language_url: languageUrl || '/translations/ru.js',
                             toolbar_drawer: 'sliding',
+                            font_formats: 'Andale Mono=andale mono,monospace;' +
+                                'Arial=arial,helvetica,sans-serif;' +
+                                'Arial Black=arial black,sans-serif;' +
+                                'Book Antiqua=book antiqua,palatino,serif;' +
+                                'Comic Sans MS=comic sans ms,sans-serif;' +
+                                'Courier New=courier new,courier,monospace;' +
+                                'Georgia=georgia,palatino,serif;' +
+                                'Helvetica=helvetica,arial,sans-serif;' +
+                                'Impact=impact,sans-serif;' +
+                                'Roboto=Roboto,sans-serif;' +
+                                'Symbol=symbol;' +
+                                'Tahoma=tahoma,arial,helvetica,sans-serif;' +
+                                'Terminal=terminal,monaco,monospace;' +
+                                'Times New Roman=times new roman,times,serif;' +
+                                'Trebuchet MS=trebuchet ms,geneva,sans-serif;' +
+                                'Verdana=verdana,geneva,sans-serif;' +
+                                'Webdings=webdings;' +
+                                'Wingdings=wingdings,zapf dingbats',
                             toolbar: short ?
                                 'undo redo | bold italic underline | forecolor backcolor | link | removeformat' :
                                 'formatselect | fontselect | fontsizeselect | bold italic strikethrough underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code | removeformat',
@@ -54,7 +74,7 @@ class MceEditor extends Component {
                             },
                             setup: editor => {
                                 editor.on('init', ed => {
-                                    ed.target.editorCommands.execCommand('fontName', false, 'Arial');
+                                    ed.target.editorCommands.execCommand('fontName', false, 'Roboto');
                                 });
                             }
                         }} />
