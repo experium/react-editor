@@ -26,21 +26,21 @@ class MceEditor extends Component {
                             paste_as_text: true,
                             fontsize_formats: '8px 10px 12px 14px 18px 24px 36px',
                             content_style: hidePreview ? `
-                                ol, li, ul, span { color: rgba(0, 0, 0, 0.65); font-size: 14px; }
-                                div { color: rgba(0, 0, 0, 0.65); font-size: 14px; color: rgba(0, 0, 0, 0.65); font-size: 14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' }
-                                h1 { font-size: 28px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
-                                h1 span { font-size: 28px; color: rgba(0, 0, 0, 0.85); }
-                                h2 { font-size: 21px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
-                                h2 span { font-size: 21px; color: rgba(0, 0, 0, 0.85); }
-                                h3 { font-size: 16.38px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
-                                h3 span { font-size: 16.38px; color: rgba(0, 0, 0, 0.85); }
-                                h4 { font-size: 14px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
-                                h4 span { font-size: 14px; color: rgba(0, 0, 0, 0.85); }
-                                h5 { font-size: 11.62px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
-                                h5 span { font-size: 11.62px; color: rgba(0, 0, 0, 0.85); }
-                                h6 { font-size: 9.38px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); }
-                                h6 span { font-size: 9.38px; color: rgba(0, 0, 0, 0.85); }
-                                p { margin-top: 0; margin-bottom: 1em; color: rgba(0, 0, 0, 0.65); font-size: 14px; }
+                                ol, li, ul, span { color: rgba(0, 0, 0, 0.65); font-size: 14px; font-family: 'Roboto', sans-serif; }
+                                div { color: rgba(0, 0, 0, 0.65); color: rgba(0, 0, 0, 0.65); }
+                                h1 { font-size: 28px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h1 span { font-size: 28px; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h2 { font-size: 21px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h2 span { font-size: 21px; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h3 { font-size: 16.38px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h3 span { font-size: 16.38px; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h4 { font-size: 14px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h4 span { font-size: 14px; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h5 { font-size: 11.62px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h5 span { font-size: 11.62px; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h6 { font-size: 9.38px; font-weight: 500; margin-bottom: 0.5em; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                h6 span { font-size: 9.38px; color: rgba(0, 0, 0, 0.85); font-family: 'Roboto', sans-serif; }
+                                p { margin-top: 0; margin-bottom: 1em; color: rgba(0, 0, 0, 0.65); font-size: 14px; font-family: 'Roboto', sans-serif; }
                             ` : null,
                             content_css: ['https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic'],
                             language_url: languageUrl || '/translations/ru.js',
@@ -65,7 +65,7 @@ class MceEditor extends Component {
                                 'Wingdings=wingdings,zapf dingbats',
                             toolbar: short ?
                                 'undo redo | bold italic underline | forecolor backcolor | link | removeformat' :
-                                'formatselect | fontselect | fontsizeselect | bold italic strikethrough underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code | removeformat',
+                                'formatselect | fontselect | fontsizeselect | bold italic strikethrough underline forecolor backcolor | alignleft aligncenter alignright alignjustify | removeformat | bullist numlist outdent indent | link image | code',
                             images_upload_handler: (info, success) => {
                                 const fr = new FileReader();
 
