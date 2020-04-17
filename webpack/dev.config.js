@@ -37,6 +37,13 @@ module.exports = {
         publicPath: '/',
         contentBase: path.resolve(__dirname, '../.tmp'),
         watchContentBase: true,
-        port: 9000
+        port: 9000,
+        disableHostCheck: true,
+        proxy: {
+            '/api': {
+                target: 'http://meconsultant.dev.experium.net',
+                changeOrigin: true,
+            },
+        },
     }
 };

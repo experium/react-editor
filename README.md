@@ -8,6 +8,9 @@ Form editor component
 
 - `components`: custom form editor [fields](#form-editor-field).
 - `data`: form editor data.
+- `uploadUrl`: form editor url for file upload.
+- `downloadUrl`: form editor url for file download.
+- `uploadImages`: form editor upload by url images for options.
 - `placeholder`: default text string for new items in radio buttons and checkboxes.
 - `onChange`: `onChange` handler will be called when form data will be changed.
 - `onPreviewOpen`: `onPreviewOpen` handler will be called when preview modal will be opened.

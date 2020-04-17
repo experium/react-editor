@@ -106,14 +106,15 @@ export class FormGenerator extends Component {
     }
 
     render() {
-        const { data: { items = [], common = {} }, uploadUrl, downloadUrl, values } = this.props;
+        const { data: { items = [], common = {} }, uploadUrl, downloadUrl, uploadImages, values } = this.props;
         const { page } = this.state;
 
         return <div className={cx(styles.experiumPlayerBuilder, 'experium-player-builder')} style={{ background: common.pageColor || 'transparent', padding: 15 }}>
             <ComponentsContext.Provider value={this.getComponents()}>
                 <FileUrlContext.Provider value={{
                     uploadUrl,
-                    downloadUrl
+                    downloadUrl,
+                    uploadImages,
                 }}>
                     <Form
                         className='formGenerator'
