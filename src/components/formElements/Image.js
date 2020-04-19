@@ -45,6 +45,7 @@ export class ImageComponent extends Component {
         const url = path(['url', 'body'], this.props);
 
         return url ? <div ref={node => this.container = node}
+            className='imageElement'
             style={{
                 width: '100%',
                 height: cover ? this.state.coverHeight : this.state.height,

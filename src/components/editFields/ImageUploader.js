@@ -24,7 +24,6 @@ class ImageUploader extends Component {
     }
 
     onChange = info => {
-        const { downloadUrl } = this.props;
         const { status, response, name } = info.file;
 
         switch (status) {
@@ -32,7 +31,7 @@ class ImageUploader extends Component {
                 this.setState({ error: false });
                 this.props.input.onChange({
                     name,
-                    data: downloadUrl(response.id)
+                    id: response.id,
                 });
                 break;
             case 'error':
@@ -65,7 +64,7 @@ class ImageUploader extends Component {
     )
 
     render() {
-        const { uploadImages } = this.props;
+        const { uploadImages, downloadUrl } = this.props;
         const { value, onChange } = this.props.input;
 
         return <Fragment>
@@ -73,7 +72,7 @@ class ImageUploader extends Component {
 
             { value &&
                 <div className={cx(styles.imageInfo, 'image-uploader-info')}>
-                    <div className={cx(styles.image, 'image-uploader-img')} style={{ backgroundImage: `url('${value.data}')` }} />
+                    <div className={cx(styles.image, 'image-uploader-img')} style={{ backgroundImage: `url('${value.id ? downloadUrl(value.id) : value.data}')` }} />
                     { value.name }
                     <Icon className={cx(styles.imageRemoveBtn, 'image-uploader-remove-btn')} type='close' onClick={this.remove} />
                 </div>

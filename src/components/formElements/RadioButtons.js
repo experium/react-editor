@@ -65,7 +65,12 @@ class RadioButtons extends Component {
                         }
                         <div className={cx({ [styles.contentWithImage]: hasImages })}>
                             { option.image &&
-                                <div className={styles.image} style={{ backgroundImage: `url('${option.image.data}')` }} />
+                                <div
+                                    className={cx(styles.image, 'option-item-image')}
+                                    style={{
+                                        backgroundImage: `url('${option.image.id ? downloadUrl(option.image.id) : option.image.data}')`
+                                    }}
+                                />
                             }
                             <Radio
                                 value={option.id}

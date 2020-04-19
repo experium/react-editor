@@ -8,6 +8,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
+import withFileUrlContext from '../../hocs/withFileUrlContext';
 import styles from '../../css/options.scss';
 import { shuffle } from '../../utils/methods';
 
@@ -57,7 +58,7 @@ class Checkboxes extends Component {
         return <Draggable key={option.id} draggableId={option.id} index={index} isDragDisabled={!isEditor}>
             { provided =>
                 <div ref={provided.innerRef} {...provided.draggableProps} style={provided.draggableProps.style}>
-                    <div className={styles.optionItem}>
+                    <div className={cx(styles.optionItem, 'option-item')}>
                         { isEditor &&
                             <div className={styles.optionReorder} {...provided.dragHandleProps}>
                                 <i className='fa fa-reorder' />
@@ -65,7 +66,12 @@ class Checkboxes extends Component {
                         }
                         <div className={cx({ [styles.contentWithImage]: hasImages })}>
                             { option.image &&
-                                <div className={styles.image} style={{ backgroundImage: `url('${option.image.data}')` }} />
+                                <div
+                                    className={cx(styles.image, 'option-item-image')}
+                                    style={{
+                                        backgroundImage: `url('${option.image.id ? downloadUrl(option.image.id) : option.image.data}')`
+                                    }}
+                                />
                             }
                             <Checkbox
                                 value={option.id}
@@ -150,5 +156,5 @@ class Checkboxes extends Component {
     }
 }
 
-export default withElementWrapper(Checkboxes);
-export const CheckboxesField = withFieldWrapper(Checkboxes);
+export default withElementWrapper(withFileUrlContext(Checkboxes));
+export const CheckboxesField = withFieldWrapper(withFileUrlContext(Checkboxes));

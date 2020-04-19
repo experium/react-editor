@@ -105,7 +105,7 @@ class EditElement extends Component {
                             </FormComponent>
                         </div>
                         { !hidePreview &&
-                            <div className={cx(styles.editorPreviewCol, 'edit-element-preview-col')}>
+                            <div className={cx(styles.editorPreviewCol, 'edit-element-preview-col experium-player-elements')}>
                                 { this.renderPreview(values) }
                             </div>
                         }
