@@ -65,7 +65,7 @@ class ImageUploader extends Component {
 
     render() {
         const { uploadImages, downloadUrl } = this.props;
-        const { value, onChange } = this.props.input;
+        const { value } = this.props.input;
 
         return <Fragment>
             { uploadImages ? this.renderRequestUploader() : this.renderStaticUploader() }

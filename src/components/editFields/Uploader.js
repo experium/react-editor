@@ -44,8 +44,8 @@ class Uploader extends Component {
     delete = () => this.props.onChange(null);
 
     render() {
-        const { input: { value }, uploadUrl, accept, withoutUrl } = this.props;
-        const props = uploadUrl && !withoutUrl ? {
+        const { input: { value }, uploadUrl, uploadImages, accept, withoutUrl } = this.props;
+        const props = uploadUrl && (!withoutUrl || uploadImages) ? {
             action: uploadUrl,
             onChange: this.onChange
         } : {
