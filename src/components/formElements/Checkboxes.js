@@ -8,7 +8,6 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
-import withFileUrlContext from '../../hocs/withFileUrlContext';
 import styles from '../../css/options.scss';
 import { shuffle } from '../../utils/methods';
 
@@ -51,10 +50,10 @@ class Checkboxes extends Component {
     }
 
     renderCheckbox = (option, index) => {
-        const { isEditor, correct, input: { value = [] }, disabled, options } = this.props;
+        const { isEditor, correct, input: { value = [] }, disabled, options, downloadUrl } = this.props;
         const selected = contains(option.id, value);
         const hasImages = any(o => o.image, options);
-
+        console.log(this.props);
         return <Draggable key={option.id} draggableId={option.id} index={index} isDragDisabled={!isEditor}>
             { provided =>
                 <div ref={provided.innerRef} {...provided.draggableProps} style={provided.draggableProps.style}>
@@ -158,5 +157,5 @@ class Checkboxes extends Component {
     }
 }
 
-export default withElementWrapper(withFileUrlContext(Checkboxes));
-export const CheckboxesField = withFieldWrapper(withFileUrlContext(Checkboxes));
+export default withElementWrapper(Checkboxes);
+export const CheckboxesField = withFieldWrapper(Checkboxes);

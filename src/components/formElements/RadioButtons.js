@@ -50,7 +50,7 @@ class RadioButtons extends Component {
     }
 
     renderRadio = (option, index) => {
-        const { isEditor, disabled, correct, input: { value }, options } = this.props;
+        const { isEditor, disabled, correct, input: { value }, options, downloadUrl } = this.props;
         const selected = value === option.id;
         const hasImages = any(o => o.image, options);
 

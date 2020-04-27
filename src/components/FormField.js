@@ -4,7 +4,9 @@ import { Form, Field } from 'react-final-form';
 import { Form as FormComponent, Button } from 'antd';
 import { isNil, equals } from 'ramda';
 
-export default class FormField extends Component {
+import withFileUrlContext from '../hocs/withFileUrlContext';
+
+class FormField extends Component {
     static propTypes = {
         item: PropTypes.object,
         component: PropTypes.func,
@@ -16,7 +18,7 @@ export default class FormField extends Component {
     };
 
     renderField = () => {
-        const { id, component: Component, item, fieldType, value, view } = this.props;
+        const { id, component: Component, item, fieldType, value, view, downloadUrl } = this.props;
         const disabled = !isNil(value) || view;
 
         return <Field
@@ -26,6 +28,7 @@ export default class FormField extends Component {
             fieldType={fieldType}
             id={id}
             disabled={disabled}
+            downloadUrl={downloadUrl}
             {...item} />;
     }
 
@@ -45,3 +48,5 @@ export default class FormField extends Component {
                 } />;
     }
 }
+
+export default withFileUrlContext(FormField);
