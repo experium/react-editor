@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Radio, Button } from 'antd';
 import uniqid from 'uniqid';
-import { append, remove, path, propEq, find, any } from 'ramda';
+import { append, remove, path, propEq, find, any, memoizeWith, identity } from 'ramda';
 import cx from 'classnames';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -103,9 +103,11 @@ class RadioButtons extends Component {
         </Draggable>;
     }
 
+    getShuffleOptions = memoizeWith(identity, options => shuffle(options))
+
     renderRadioButtons() {
         const { options, allowShuffle, isEditor } = this.props;
-        const items = allowShuffle && !isEditor ? shuffle(options) : options;
+        const items = allowShuffle && !isEditor ? this.getShuffleOptions(options) : options;
 
         return items.map(this.renderRadio);
     }

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox, Button } from 'antd';
-import { append, remove, contains, without, path, find, propEq, any } from 'ramda';
+import { append, remove, contains, memoizeWith, identity, without, path, find, propEq, any } from 'ramda';
 import uniqid from 'uniqid';
 import cx from 'classnames';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
@@ -104,9 +104,11 @@ class Checkboxes extends Component {
         </Draggable>;
     }
 
+    getShuffleOptions = memoizeWith(identity, options => shuffle(options))
+
     renderCheckboxes() {
         const { options, allowShuffle, isEditor } = this.props;
-        const items = allowShuffle && !isEditor ? shuffle(options) : options;
+        const items = allowShuffle && !isEditor ? this.getShuffleOptions(options) : options;
 
         return items.map(this.renderCheckbox);
     }

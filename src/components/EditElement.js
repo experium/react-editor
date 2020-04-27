@@ -44,6 +44,7 @@ class EditElement extends Component {
         return staticContent ?
             <Component {...item} id='preview' /> :
             <FormField
+                key={JSON.stringify(item)}
                 id='preview'
                 item={item}
                 fieldType={item.type}
