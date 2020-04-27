@@ -53,7 +53,7 @@ class Checkboxes extends Component {
         const { isEditor, correct, input: { value = [] }, disabled, options, downloadUrl } = this.props;
         const selected = contains(option.id, value);
         const hasImages = any(o => o.image, options);
-        console.log(this.props);
+
         return <Draggable key={option.id} draggableId={option.id} index={index} isDragDisabled={!isEditor}>
             { provided =>
                 <div ref={provided.innerRef} {...provided.draggableProps} style={provided.draggableProps.style}>
