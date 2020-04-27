@@ -14,17 +14,18 @@ export class ImageComponent extends Component {
     }
 
     componentDidUpdate(prev) {
-        if (path(['url', 'body'], prev) !== path(['url', 'body'], this.props)) {
+        if (path(['url', 'name'], prev) !== path(['url', 'name'], this.props)) {
             this.getHeight();
         }
     }
 
     getHeight = () => {
-        const url = path(['url', 'body'], this.props);
+        const { downloadUrl } = this.props;
+        const url = pathOr({}, ['url'], this.props);
 
         if (url) {
             const img = new Image();
-            img.src = url;
+            img.src = url.id ? downloadUrl(url.id) : url.body;
             img.onload = () => {
                 const height = this.container.clientWidth < img.width ?
                     (this.container.clientWidth * 100 / img.width) * img.height / 100 :
@@ -43,7 +44,7 @@ export class ImageComponent extends Component {
     render() {
         const { cover, repeat, downloadUrl } = this.props;
         const url = pathOr({}, ['url'], this.props);
-        console.log(downloadUrl);
+
         return url ? <div ref={node => this.container = node}
             className='imageElement'
             style={{
