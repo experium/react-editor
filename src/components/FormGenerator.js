@@ -83,7 +83,9 @@ export class FormGenerator extends Component {
         return <Row key={`row-${id}`}>
             <Col>
                 { staticContent ?
-                    <Component {...item} id={id} /> :
+                    <FileUrlContext.Consumer>
+                        {fileContext => <Component {...item} {...fileContext} id={id} />}
+                    </FileUrlContext.Consumer> :
                     <FormField
                         id={id}
                         item={item}

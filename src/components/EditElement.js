@@ -9,6 +9,7 @@ import { createGlobalStyle } from 'styled-components';
 
 import styles from '../css/editor.scss';
 import formBuilderStyles from '../css/formBuilder.scss';
+import FileUrlContext from '../contexts/FileUrlContext';
 import FormField from './FormField';
 import Input from './editFields/Input';
 import MceEditor from './editFields/MceEditor';
@@ -42,7 +43,9 @@ class EditElement extends Component {
         const { staticContent, formComponent: Component } = find(propEq('type', item.type), components);
 
         return staticContent ?
-            <Component {...item} id='preview' /> :
+            <FileUrlContext.Consumer>
+                {fileContext => <Component {...item} {...fileContext} id='preview' />}
+            </FileUrlContext.Consumer> :
             <FormField
                 key={JSON.stringify(item)}
                 id='preview'

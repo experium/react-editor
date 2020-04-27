@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { path } from 'ramda';
+import { path, pathOr } from 'ramda';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 
@@ -41,15 +41,15 @@ export class ImageComponent extends Component {
     }
 
     render() {
-        const { cover, repeat } = this.props;
-        const url = path(['url', 'body'], this.props);
-
+        const { cover, repeat, downloadUrl } = this.props;
+        const url = pathOr({}, ['url'], this.props);
+        console.log(downloadUrl);
         return url ? <div ref={node => this.container = node}
             className='imageElement'
             style={{
                 width: '100%',
                 height: cover ? this.state.coverHeight : this.state.height,
-                backgroundImage: `url('${url}')`,
+                backgroundImage: `url('${url.id ? downloadUrl(url.id) : url.body}')`,
                 backgroundSize: cover ? 'cover' : 'contain',
                 backgroundRepeatX: repeat ? 'repeat' : 'no-repeat'
             }} /> : null;
