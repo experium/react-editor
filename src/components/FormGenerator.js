@@ -81,7 +81,7 @@ export class FormGenerator extends Component {
         const { staticContent, fieldType, formComponent: Component } = find(propEq('type', item.type), this.getComponents(placeholder));
 
         return <Row key={`row-${id}`}>
-            <Col>
+            <Col span={24}>
                 { staticContent ?
                     <FileUrlContext.Consumer>
                         {fileContext => <Component {...item} {...fileContext} id={id} />}
@@ -124,7 +124,7 @@ export class FormGenerator extends Component {
                         initialValues={values}
                         subscription={{ submitting: true, submitFailed: true, invalid: true }}
                         render={({ handleSubmit, invalid }) =>
-                            <FormComponent onSubmit={handleSubmit}>
+                            <FormComponent onFinish={handleSubmit}>
                                 <DragDropContext>
                                     { addIndex(filter)((item, index) =>
                                         common.pages ? index === page : true, items).map((row, index) => this.renderRow(row, index, invalid)

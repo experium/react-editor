@@ -69,7 +69,7 @@ class EditElement extends Component {
                 render={({ handleSubmit, values }) =>
                     <div className={cx(styles.editor, item.type, 'edit-element')}>
                         <div className={cx(styles.editorCol, 'edit-element-col', { [styles.editorColHidePreview]: hidePreview })}>
-                            <FormComponent onSubmit={handleSubmit}>
+                            <FormComponent onFinish={handleSubmit}>
                                 <div className={cx(styles.editorFields, 'edit-element-fields')}>
                                     { fields.map(item => (path(['props', 'cond'], item) ? item.props.cond(values) : true) &&
                                         (item.fieldArray ?

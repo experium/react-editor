@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Upload, Icon } from 'antd';
+import { Button, Upload } from 'antd';
+import { DeleteOutlined, UploadOutlined } from '@ant-design/icons';
 
 import withFieldWrapper from '../../hocs/withFieldWrapper';
 import withFileUrlContext from '../../hocs/withFileUrlContext';
@@ -55,8 +56,8 @@ class Uploader extends Component {
         return value ?
             <Fragment>
                 <span style={{ marginRight: 15 }}>{ value.name }</span>
-                <Button type='danger' onClick={this.delete}>
-                    <Icon type='delete' /> Удалить
+                <Button danger onClick={this.delete}>
+                    <DeleteOutlined /> Удалить
                 </Button>
             </Fragment> :
             <Fragment>
@@ -65,7 +66,7 @@ class Uploader extends Component {
                     accept={accept}
                     showUploadList={false}
                     disabled={this.state.uploading}>
-                    <Button loading={this.state.uploading} icon='upload'>
+                    <Button loading={this.state.uploading} icon={<UploadOutlined />}>
                         Загрузить файл
                     </Button>
                 </Upload>

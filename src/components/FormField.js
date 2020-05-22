@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
-import { Form as FormComponent, Button } from 'antd';
-import { isNil, equals } from 'ramda';
+import { Form as FormComponent } from 'antd';
+import { isNil } from 'ramda';
 
 import withFileUrlContext from '../hocs/withFileUrlContext';
 
@@ -42,7 +42,7 @@ class FormField extends Component {
                 onSubmit={() => {}}
                 subscription={{ submitting: true, submitFailed: true, error: true}}
                 render={({ handleSubmit }) =>
-                    <FormComponent onSubmit={handleSubmit}>
+                    <FormComponent onFinish={handleSubmit}>
                         { this.renderField() }
                     </FormComponent>
                 } />;

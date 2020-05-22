@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Button } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFileUrlContext from '../../hocs/withFileUrlContext';
@@ -13,7 +14,7 @@ class DownloadFileComponent extends Component {
             { file &&
                 <Button
                     style={{ margin: '10px 0' }}
-                    icon='download'
+                    icon={<DownloadOutlined />}
                     target='_blank'
                     href={file.id ? downloadUrl(file.id) : file.body}
                     download>

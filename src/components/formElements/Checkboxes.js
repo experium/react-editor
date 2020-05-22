@@ -5,6 +5,7 @@ import { append, remove, contains, memoizeWith, identity, without, path, find, p
 import uniqid from 'uniqid';
 import cx from 'classnames';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
@@ -89,9 +90,9 @@ class Checkboxes extends Component {
                                     <Button
                                         className={styles.optionRemoveBtn}
                                         ghost
-                                        icon='delete'
+                                        icon={<DeleteOutlined />}
                                         size='small'
-                                        type='danger'
+                                        danger
                                         shape='circle'
                                         onClick={() => this.removeItem(index)} />
                                 </Fragment>
@@ -138,7 +139,7 @@ class Checkboxes extends Component {
                         ghost
                         type='primary'
                         shape='circle'
-                        icon='plus'
+                        icon={<PlusOutlined />}
                         size='small'
                         onClick={this.addItem} />
                 </div>

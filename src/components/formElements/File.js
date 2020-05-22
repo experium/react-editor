@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Icon, Upload } from 'antd';
+import { Button, Upload } from 'antd';
+import { DownloadOutlined, UploadOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
@@ -47,16 +48,16 @@ class File extends Component {
         return value ?
             <Button.Group>
                 <Button download href={downloadUrl ? downloadUrl(value) : value} target='_blank'>
-                    <Icon type='download' /> Скачать
+                    <DownloadOutlined /> Скачать
                 </Button>
-                <Button type='danger' onClick={this.delete}>
-                    <Icon type='delete' /> Удалить
+                <Button danger onClick={this.delete}>
+                    <DeleteOutlined /> Удалить
                 </Button>
             </Button.Group> :
             <Fragment>
                 <Upload {...props} fileList={[]}>
                     <Button>
-                        <Icon type='upload' /> Загрузить файл
+                        <UploadOutlined /> Загрузить файл
                     </Button>
                 </Upload>
                 { this.state.error && <span style={{ color: 'red' }}>Не удалось загрузить файл</span> }

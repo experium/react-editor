@@ -4,6 +4,7 @@ import { Field } from 'react-final-form';
 import uniqid from 'uniqid';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import cx from 'classnames';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 
 import ImageUploader from './ImageUploader';
 import styles from '../../css/multipleField.scss';
@@ -62,7 +63,7 @@ export default class Multiple extends Component {
                                                             component={ImageUploader} />
                                                     }
                                                     { fields.length > 1 &&
-                                                        <Button ghost type='danger' icon='delete' onClick={() => fields.remove(index)} />
+                                                        <Button ghost danger icon={<DeleteOutlined />} onClick={() => fields.remove(index)} />
                                                     }
                                                 </div>
                                             </div>
@@ -75,7 +76,7 @@ export default class Multiple extends Component {
                     }
                 </Droppable>
             </DragDropContext>
-            <Button icon='plus' onClick={this.addItem}>Добавить</Button>
+            <Button icon={<PlusOutlined />} onClick={this.addItem}>Добавить</Button>
         </Form.Item>;
     }
 }

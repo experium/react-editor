@@ -3,6 +3,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { Button, Spin, Modal } from 'antd';
 import cx from 'classnames';
 import { pathOr, range, filter } from 'ramda';
+import { LeftOutlined, RightOutlined, FullscreenOutlined } from '@ant-design/icons';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFileUrlContext from '../../hocs/withFileUrlContext';
@@ -65,11 +66,11 @@ class PdfField extends Component {
                 <Button.Group>
                     { !allPages &&
                         <Fragment>
-                            <Button icon='left' onClick={this.back} disabled={pageNumber < 2} />
-                            <Button icon='right' onClick={this.next} disabled={pageNumber >= numPages} />
+                            <Button icon={<LeftOutlined />} onClick={this.back} disabled={pageNumber < 2} />
+                            <Button icon={<RightOutlined />} onClick={this.next} disabled={pageNumber >= numPages} />
                         </Fragment>
                     }
-                    <Button icon='fullscreen' onClick={this.openFullPdf} />
+                    <Button icon={<FullscreenOutlined />} onClick={this.openFullPdf} />
                 </Button.Group>
             </div>
             <div style={{ minHeight: pathOr(0, ['ref', 'clientHeight'], this.pageRef) }}>

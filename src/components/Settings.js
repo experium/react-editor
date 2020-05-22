@@ -13,7 +13,7 @@ export default class Settings extends Component {
             onSubmit={onSubmit}
             initialValues={settings}
             render={({ handleSubmit }) =>
-                <FormComponent onSubmit={handleSubmit}>
+                <FormComponent onFinish={handleSubmit}>
                     <Field
                         name='everyQuestionSubmit'
                         component={Switch}

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { Upload, Button, Icon } from 'antd';
+import { Upload, Button } from 'antd';
 import cx from 'classnames';
+import { CloseOutlined, FileImageOutlined } from '@ant-design/icons';
 
 import styles from '../../css/imageUploader.scss';
 
@@ -49,7 +50,7 @@ class ImageUploader extends Component {
             accept='image/*'
             beforeUpload={this.beforeUpload}
             fileList={[]}>
-            <Button icon='file-image' />
+            <Button icon={<FileImageOutlined />} />
         </Upload>
     )
 
@@ -59,7 +60,7 @@ class ImageUploader extends Component {
             accept='image/*'
             action={this.props.uploadUrl}
             onChange={this.onChange}>
-            <Button style={{ color: this.state.error ? 'red' : '' }} icon='file-image' />
+            <Button style={{ color: this.state.error ? 'red' : '' }} icon={<FileImageOutlined />} />
         </Upload>
     )
 
@@ -74,7 +75,7 @@ class ImageUploader extends Component {
                 <div className={cx(styles.imageInfo, 'image-uploader-info')}>
                     <div className={cx(styles.image, 'image-uploader-img')} style={{ backgroundImage: `url('${value.id ? downloadUrl(value.id) : value.data}')` }} />
                     { value.name }
-                    <Icon className={cx(styles.imageRemoveBtn, 'image-uploader-remove-btn')} type='close' onClick={this.remove} />
+                    <CloseOutlined className={cx(styles.imageRemoveBtn, 'image-uploader-remove-btn')} onClick={this.remove} />
                 </div>
             }
         </Fragment>;

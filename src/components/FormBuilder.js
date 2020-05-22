@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'antd';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { contains, concat } from 'ramda';
+import { contains } from 'ramda';
 import cx from 'classnames';
+import { EyeOutlined, SettingOutlined } from '@ant-design/icons';
 
 import Toolbar from './Toolbar';
 import Container from './Container';
@@ -82,11 +83,11 @@ class FormBuilderComponent extends Component {
                         <Button
                             type='primary'
                             onClick={this.openPreview}
-                            icon='eye'>
+                            icon={<EyeOutlined />}>
                             Предпросмотр
                         </Button>
                         <Button
-                            icon='setting'
+                            icon={<SettingOutlined />}
                             onClick={this.openSettings}>
                             Настройки
                         </Button>

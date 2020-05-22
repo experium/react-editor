@@ -5,6 +5,7 @@ import uniqid from 'uniqid';
 import { append, remove, path, propEq, find, any, memoizeWith, identity } from 'ramda';
 import cx from 'classnames';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
@@ -89,9 +90,9 @@ class RadioButtons extends Component {
                                     <Button
                                         className={cx(styles.optionRemoveBtn, 'option-remove-btn')}
                                         ghost
-                                        icon='remove'
+                                        icon={<DeleteOutlined />}
                                         size='small'
-                                        type='danger'
+                                        danger
                                         shape='circle'
                                         onClick={() => this.removeItem(index)} />
                                 </Fragment>
@@ -137,7 +138,7 @@ class RadioButtons extends Component {
                         ghost
                         type='primary'
                         shape='circle'
-                        icon='plus'
+                        icon={<PlusOutlined />}
                         size='small'
                         onClick={this.addItem} />
                 </div>
