@@ -16,6 +16,7 @@ export class FormGenerator extends Component {
     static propTypes = {
         data: PropTypes.object,
         onSubmit: PropTypes.func,
+        renderFooter: PropTypes.func,
         preview: PropTypes.bool,
         values: PropTypes.object,
         components: PropTypes.array,
@@ -47,7 +48,7 @@ export class FormGenerator extends Component {
         formProps.reset(values);
     }
 
-    renderFooter = (staticContent, index, invalid, formProps, formValues) => {
+    renderFooter = ({ staticContent, index, invalid, formProps, formValues }) => {
         const { data: { common = {}, items, elements }, submitText} = this.props;
         const { page } = this.state;
 
@@ -79,8 +80,8 @@ export class FormGenerator extends Component {
         </Button.Group>;
     }
 
-    renderRow = (id, index, invalid, formProps, formValues) => {
-        const { data: { elements = {} }, preview, values, view, placeholder } = this.props;
+    renderRow = (id, index, invalid, formProps, formValues, handleSubmit) => {
+        const { data: { elements = {} }, preview, values, view, placeholder, renderFooter } = this.props;
         const item = elements[id];
         const options = find(propEq('type', item.type), this.getComponents(placeholder));
         const { staticContent, fieldType, formComponent: Component } = options;
@@ -103,7 +104,7 @@ export class FormGenerator extends Component {
                         isField />
                 }
             </Col>
-            { this.renderFooter(staticContent, index, invalid, formProps, formValues) }
+            { (renderFooter || this.renderFooter)({ staticContent, index, invalid, formProps, formValues, handleSubmit }) }
         </Row>;
     }
 
@@ -132,9 +133,9 @@ export class FormGenerator extends Component {
                         render={({ handleSubmit, invalid, values, form }) =>
                             <FormComponent onFinish={handleSubmit}>
                                 <DragDropContext>
-                                    { addIndex(filter)((item, index) =>
-                                        common.pages ? index === page : true, items).map((row, index) => this.renderRow(row, index, invalid, form, values)
-                                    )}
+                                    { addIndex(filter)((item, index) => common.pages ? index === page : true, items)
+                                        .map((row, index) => this.renderRow(row, index, invalid, form, values, handleSubmit))
+                                    }
                                 </DragDropContext>
                             </FormComponent>
                         } />
