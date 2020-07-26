@@ -15,7 +15,7 @@ import DownloadFile, { DownloadFile as DownloadFileComponent } from '../componen
 import Pdf, { PdfComponent } from '../components/formElements/Pdf';
 import Image, { ImageComponent } from '../components/formElements/Image';
 
-const arrayIncorrect = (value, correct) => length(difference(correct, value || [])) ? 'Неправильный ответ' : undefined;
+const arrayIncorrect = (value, correct) => length(difference(correct || [], value || [])) ? 'Неправильный ответ' : undefined;
 
 const renderInfo = (prop = 'label') => props => <div dangerouslySetInnerHTML={{ __html: props[prop] }} />;
 
