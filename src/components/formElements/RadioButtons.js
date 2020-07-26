@@ -11,6 +11,7 @@ import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
 import styles from '../../css/options.scss';
 import { shuffle } from '../../utils/methods';
+import Editor from './Editor';
 
 class RadioButtons extends Component {
     static propTypes = {
@@ -51,14 +52,15 @@ class RadioButtons extends Component {
     }
 
     renderRadio = (option, index) => {
-        const { isEditor, disabled, correct, input: { value }, options, downloadUrl } = this.props;
+        const { isEditor, disabled, correct, allowCorrect, input: { value }, options, downloadUrl } = this.props;
         const selected = value === option.id;
+        const isCorrect = option.id === correct;
         const hasImages = any(o => o.image, options);
 
         return <Draggable key={option.id} draggableId={option.id} index={index} isDragDisabled={!isEditor}>
             { provided =>
                 <div ref={provided.innerRef} {...provided.draggableProps} style={provided.draggableProps.style}>
-                    <div className={cx(styles.optionItem, 'option-item')}>
+                    <div className={cx(styles.optionItem, 'option-item', { 'option-item-correct': allowCorrect && isCorrect })}>
                         { isEditor &&
                             <div className={cx(styles.optionReorder, 'option-reorder')} {...provided.dragHandleProps}>
                                 <i className='fa fa-reorder' />
@@ -76,25 +78,25 @@ class RadioButtons extends Component {
                             <Radio
                                 value={option.id}
                                 className={disabled ? cx({
-                                    'correct': (correct ? selected && option.id === correct : selected),
-                                    'incorrect': (correct ? selected && option.id !== correct : false)
+                                    'correct': (correct ? selected && isCorrect : selected),
+                                    'incorrect': (correct ? selected && !isCorrect : false)
                                 }) : null}>
                                 { !isEditor && <span className={styles.optionLabel} dangerouslySetInnerHTML={{ __html: option.label }} /> }
                             </Radio>
                             { isEditor &&
                                 <Fragment>
-                                    <Editor
-                                        {...this.props}
-                                        path={`options.${index}.label`}
-                                        short />
                                     <Button
-                                        className={cx(styles.optionRemoveBtn, 'option-remove-btn')}
+                                        className={styles.optionRemoveBtn}
                                         ghost
                                         icon={<DeleteOutlined />}
                                         size='small'
                                         danger
                                         shape='circle'
                                         onClick={() => this.removeItem(index)} />
+                                    <Editor
+                                        {...this.props}
+                                        path={`options.${index}.label`}
+                                        short />
                                 </Fragment>
                             }
                         </div>
@@ -118,7 +120,7 @@ class RadioButtons extends Component {
 
         return <div>
             <Radio.Group
-                className={cx({ [styles.inlineOptions]: inline })}
+                className={cx({ [styles.inlineOptions]: inline, elementEditor: isEditor })}
                 onChange={this.onChange}
                 value={isEditor ? correct : value}
                 disabled={disabled}>
@@ -131,18 +133,6 @@ class RadioButtons extends Component {
                     }
                 </Droppable>
             </Radio.Group>
-            { isEditor &&
-                <div>
-                    <Button
-                        className={cx(styles.optionAddBtn, 'option-add-btn')}
-                        ghost
-                        type='primary'
-                        shape='circle'
-                        icon={<PlusOutlined />}
-                        size='small'
-                        onClick={this.addItem} />
-                </div>
-            }
             { !!(disabled && correct && correct !== value) &&
                 <div className={cx(styles.correctAnswers, 'correct-answers')}>
                     <b>Правильный ответ: </b>

@@ -74,7 +74,7 @@ class FormBuilderComponent extends Component {
     }
 
     render() {
-        const { items, elements, addItem, components, commonSettings, uploadUrl, downloadUrl, uploadImages, mceLanguageUrl } = this.props;
+        const { items, elements, addItem, components, commonSettings, uploadUrl, downloadUrl, uploadImages, submitText, mceLanguageUrl } = this.props;
 
         return <div className={cx(styles.experiumPlayerBuilder, 'experium-player-builder')}>
             <div className={cx(styles.reactFormBuilder, 'react-form-builder clearfix')}>
@@ -119,6 +119,7 @@ class FormBuilderComponent extends Component {
                         components={components}
                         uploadUrl={uploadUrl}
                         downloadUrl={downloadUrl}
+                        submitText={submitText}
                         preview />
                 </Modal>
                 <Modal

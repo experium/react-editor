@@ -81,9 +81,11 @@ export default WrappedComponent =>
         setOpenedEditModal = openedEditModal => this.setState({ openedEditModal });
 
         getComponents = () => {
-            const { placeholder, components } = this.props;
+            const { placeholder, components, getComponents } = this.props;
 
-            return concat(COMPONENTS_DEFAULTS(placeholder), components);
+            const items = concat(COMPONENTS_DEFAULTS(placeholder), components);
+
+            return getComponents ? getComponents(items) : items;
         }
 
         editCommon = common => this.setState({ common });

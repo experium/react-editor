@@ -40,7 +40,8 @@ const GlobalStyle = createGlobalStyle`
 class EditElement extends Component {
     renderPreview = item => {
         const { components } = this.props;
-        const { staticContent, formComponent: Component } = find(propEq('type', item.type), components);
+        const options =  find(propEq('type', item.type), components);
+        const { staticContent, formComponent: Component } = options;
 
         return staticContent ?
             <FileUrlContext.Consumer>
@@ -48,8 +49,10 @@ class EditElement extends Component {
             </FileUrlContext.Consumer> :
             <FormField
                 key={JSON.stringify(item)}
-                id='preview'
+                id={item.allowCorrect ? 'correct' : 'preview'}
+                isField={!!item.allowCorrect}
                 item={item}
+                options={options}
                 fieldType={item.type}
                 component={Component}
                 preview

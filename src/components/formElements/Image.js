@@ -28,12 +28,14 @@ export class ImageComponent extends Component {
             img.src = url.id ? downloadUrl(url.id) : url.body;
             img.onload = () => {
                 const height = this.container.clientWidth < img.width ?
-                    (this.container.clientWidth * 100 / img.width) * img.height / 100 :
+                    (((this.container.clientWidth * 100) / img.width) * img.height) / 100 :
                     img.height;
 
                 this.setState({
                     height,
-                    coverHeight: this.container.clientWidth > img.width  ? (this.container.clientWidth * 100 / img.width) * img.height / 100 : height
+                    coverHeight: this.container.clientWidth > img.width  ?
+                        (((this.container.clientWidth * 100) / img.width) * img.height) / 100 :
+                        height
                 });
             };
         } else {

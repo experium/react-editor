@@ -21,7 +21,7 @@ class ColorPicker extends Component {
         const { input: { value }} = this.props;
 
         return <div>
-            <div className={styles.swatch} onClick={this.toggle} pointer>
+            <div className={styles.swatch} onClick={this.toggle} pointer='true'>
                 <div className={styles.color} style={{ background: value }} />
             </div>
             { this.state.open &&

@@ -12,7 +12,8 @@
 .optionRemoveBtn {
     border: none !important;
     font-weight: 700 !important;
-    margin-right: 5px;
+    float: right;
+    line-height: 60px;
 }
 
 .optionRemoveBtn {
@@ -27,7 +28,7 @@
     display: inline-block;
     margin-bottom: 0 !important;
 }
-    
+
 .correctAnswers em {
     font-style: normal !important;
 }

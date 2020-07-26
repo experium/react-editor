@@ -1,6 +1,8 @@
 import React from 'react';
 import uniqid from 'uniqid';
 import range from 'ramda/src/range';
+import length from 'ramda/src/length';
+import difference from 'ramda/src/difference';
 
 import Checkboxes, { CheckboxesField } from '../components/formElements/Checkboxes';
 import RadioButtons, { RadioButtonsField } from '../components/formElements/RadioButtons';
@@ -12,6 +14,8 @@ import File, { FileField } from '../components/formElements/File';
 import DownloadFile, { DownloadFile as DownloadFileComponent } from '../components/formElements/DownloadFile';
 import Pdf, { PdfComponent } from '../components/formElements/Pdf';
 import Image, { ImageComponent } from '../components/formElements/Image';
+
+const arrayIncorrect = (value, correct) => length(difference(correct, value || [])) ? 'Неправильный ответ' : undefined;
 
 const renderInfo = (prop = 'label') => props => <div dangerouslySetInnerHTML={{ __html: props[prop] }} />;
 
@@ -48,11 +52,13 @@ const COMPONENTS_DEFAULTS = placeholder => ([
             }))
         },
         ableCorrect: true,
+        correctValidator: arrayIncorrect,
         fields: [
             { type: 'editor', label: 'Название поля', prop: 'label', props: { short: true }},
             { type: 'multiple', label: 'Ответы', prop: 'options', fieldArray: true },
             { type: 'input', label: 'Вес вопроса', prop: 'questionWeight', props: { number: true }},
             { type: 'switch', label: 'Обязательное поле', prop: 'required' },
+            { type: 'switch', label: 'Правильный ответ', prop: 'allowCorrect' },
             { type: 'switch', label: 'Выводить варианты в случайном порядке', prop: 'allowShuffle' },
             { type: 'switch', label: 'Отображать варианты по горизонтали', prop: 'inline' }
         ]
@@ -78,6 +84,7 @@ const COMPONENTS_DEFAULTS = placeholder => ([
             { type: 'multiple', label: 'Ответы', prop: 'options', fieldArray: true },
             { type: 'input', label: 'Вес вопроса', prop: 'questionWeight', props: { number: true }},
             { type: 'switch', label: 'Обязательное поле', prop: 'required' },
+            { type: 'switch', label: 'Правильный ответ', prop: 'allowCorrect' },
             { type: 'switch', label: 'Выводить варианты в случайном порядке', prop: 'allowShuffle' },
             { type: 'switch', label: 'Отображать варианты по горизонтали', prop: 'inline' }
         ]

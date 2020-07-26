@@ -17,7 +17,7 @@ class VideoPlayer extends Component {
 
         this.setState({
             minWidth,
-            minHeight: (100 * minWidth / this.props.width) * this.props.height / 100
+            minHeight: (((100 * minWidth) / this.props.width) * this.props.height) / 100
         });
     }
 
@@ -56,8 +56,9 @@ export class Video extends Component {
                     onChange={this.onChange}
                     placeholder='Вставьте ссылку на видео с youtube' />
             }
-            { src ? <VideoPlayer isDraggingOver={isDraggingOver} width={width} height={height} src={src} /> : null
-            }
+            { src ? (
+                <VideoPlayer isDraggingOver={isDraggingOver} width={width} height={height} src={src} />
+            ) : null}
         </div>;
     }
 }

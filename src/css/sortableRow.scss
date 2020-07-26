@@ -98,3 +98,29 @@
         margin-right: 8px;
     }
 }
+
+.elementEditor {
+    :global {
+        .ant-radio-wrapper, .ant-checkbox-wrapper {
+            float: left;
+            line-height: 60px;
+        }
+
+        .sortable-row-wrapper {
+            margin-left: 30px;
+            margin-right: 50px;
+
+            .sortable-row-content {
+                padding-left: 15px;
+            }
+        }
+
+        .option-item {
+            clear: both;
+
+            .option-reorder {
+                display: none;
+            }
+        }
+    }
+}

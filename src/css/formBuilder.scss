@@ -218,5 +218,14 @@
             content: '\f00d';
             color: #f5222d;
         }
+
+        .ant-form-item-has-error .option-item-correct {
+            .ant-checkbox .ant-checkbox-inner {
+                border-color: #f5222d;
+            }
+            .ant-radio .ant-radio-inner {
+                border-color: #f5222d;
+            }
+        }
     }
 }

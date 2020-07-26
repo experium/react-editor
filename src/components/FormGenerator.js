@@ -18,6 +18,7 @@ export class FormGenerator extends Component {
         onSubmit: PropTypes.func,
         preview: PropTypes.bool,
         values: PropTypes.object,
+        components: PropTypes.array,
         view: PropTypes.bool
     };
 
@@ -31,7 +32,7 @@ export class FormGenerator extends Component {
         page: 0
     };
 
-    onSubmit = values => {
+    onSubmit = (values, ...props) => {
         this.props.onSubmit && this.props.onSubmit(values);
     }
 
@@ -41,10 +42,13 @@ export class FormGenerator extends Component {
 
     goBack = () => this.setState(prev => ({ page: prev.page - 1 }));
 
-    goNext = () => this.setState(prev => ({ page: prev.page + 1 }));
+    goNext = (formProps, values) => {
+        this.setState(prev => ({ page: prev.page + 1 }));
+        formProps.reset(values);
+    }
 
-    renderFooter = (staticContent, index, invalid) => {
-        const { data: { common = {}, items, elements }} = this.props;
+    renderFooter = (staticContent, index, invalid, formProps, formValues) => {
+        const { data: { common = {}, items, elements }, submitText} = this.props;
         const { page } = this.state;
 
         const components = COMPONENTS_DEFAULTS().concat(this.props.components);
@@ -54,7 +58,7 @@ export class FormGenerator extends Component {
             { common.pages && page > 0 &&
                 <Button
                     htmlType='submit'
-                    onClick={!invalid ? this.goBack : null}>
+                    onClick={this.goBack}>
                     Назад
                 </Button>
             }
@@ -62,23 +66,24 @@ export class FormGenerator extends Component {
                 <Button
                     htmlType='submit'
                     type='primary'>
-                    Сохранить
+                    { submitText || 'Сохранить'}
                 </Button>
             }
             { common.pages && page < items.length - 1 &&
                 <Button
                     htmlType='submit'
-                    onClick={!invalid ? this.goNext : null}>
+                    onClick={!invalid ? () => this.goNext(formProps, formValues) : null}>
                     Вперед
                 </Button>
             }
         </Button.Group>;
     }
 
-    renderRow = (id, index, invalid) => {
+    renderRow = (id, index, invalid, formProps, formValues) => {
         const { data: { elements = {} }, preview, values, view, placeholder } = this.props;
         const item = elements[id];
-        const { staticContent, fieldType, formComponent: Component } = find(propEq('type', item.type), this.getComponents(placeholder));
+        const options = find(propEq('type', item.type), this.getComponents(placeholder));
+        const { staticContent, fieldType, formComponent: Component } = options;
 
         return <Row key={`row-${id}`}>
             <Col span={24}>
@@ -89,6 +94,7 @@ export class FormGenerator extends Component {
                     <FormField
                         id={id}
                         item={item}
+                        options={options}
                         fieldType={fieldType}
                         component={Component}
                         value={values[id]}
@@ -97,7 +103,7 @@ export class FormGenerator extends Component {
                         isField />
                 }
             </Col>
-            { this.renderFooter(staticContent, index, invalid) }
+            { this.renderFooter(staticContent, index, invalid, formProps, formValues) }
         </Row>;
     }
 
@@ -122,12 +128,12 @@ export class FormGenerator extends Component {
                         className='formGenerator'
                         onSubmit={this.onSubmit}
                         initialValues={values}
-                        subscription={{ submitting: true, submitFailed: true, invalid: true }}
-                        render={({ handleSubmit, invalid }) =>
+                        subscription={{ submitting: true, submitFailed: true, invalid: true, values: true }}
+                        render={({ handleSubmit, invalid, values, form }) =>
                             <FormComponent onFinish={handleSubmit}>
                                 <DragDropContext>
                                     { addIndex(filter)((item, index) =>
-                                        common.pages ? index === page : true, items).map((row, index) => this.renderRow(row, index, invalid)
+                                        common.pages ? index === page : true, items).map((row, index) => this.renderRow(row, index, invalid, form, values)
                                     )}
                                 </DragDropContext>
                             </FormComponent>

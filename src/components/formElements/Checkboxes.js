@@ -11,6 +11,7 @@ import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
 import styles from '../../css/options.scss';
 import { shuffle } from '../../utils/methods';
+import Editor from './Editor';
 
 class Checkboxes extends Component {
     static propTypes = {
@@ -51,16 +52,17 @@ class Checkboxes extends Component {
     }
 
     renderCheckbox = (option, index) => {
-        const { isEditor, correct, input: { value = [] }, disabled, options, downloadUrl } = this.props;
+        const { isEditor, correct, allowCorrect, input: { value = [] }, disabled, options, downloadUrl } = this.props;
         const selected = contains(option.id, value);
+        const isCorrect = contains(option.id, correct);
         const hasImages = any(o => o.image, options);
 
         return <Draggable key={option.id} draggableId={option.id} index={index} isDragDisabled={!isEditor}>
             { provided =>
                 <div ref={provided.innerRef} {...provided.draggableProps} style={provided.draggableProps.style}>
-                    <div className={cx(styles.optionItem, 'option-item')}>
+                    <div className={cx(styles.optionItem, 'option-item', { 'option-item-correct': allowCorrect && isCorrect })}>
                         { isEditor &&
-                            <div className={styles.optionReorder} {...provided.dragHandleProps}>
+                            <div className={cx(styles.optionReorder, 'option-reorder')} {...provided.dragHandleProps}>
                                 <i className='fa fa-reorder' />
                             </div>
                         }
@@ -76,17 +78,13 @@ class Checkboxes extends Component {
                             <Checkbox
                                 value={option.id}
                                 className={disabled ? cx({
-                                    'correct': (correct.length ? selected && contains(option.id, correct) : selected),
-                                    'incorrect': (correct.length ? selected && !contains(option.id, correct) : false)
+                                    'correct': (correct.length ? selected && isCorrect : selected),
+                                    'incorrect': (correct.length ? selected && !isCorrect : false)
                                 }) : null}>
                                 { !isEditor && <span className={styles.optionLabel} dangerouslySetInnerHTML={{ __html: option.label }} />}
                             </Checkbox>
                             { isEditor &&
                                 <Fragment>
-                                    <Editor
-                                        {...this.props}
-                                        path={`options.${index}.label`}
-                                        short />
                                     <Button
                                         className={styles.optionRemoveBtn}
                                         ghost
@@ -95,6 +93,10 @@ class Checkboxes extends Component {
                                         danger
                                         shape='circle'
                                         onClick={() => this.removeItem(index)} />
+                                    <Editor
+                                        {...this.props}
+                                        path={`options.${index}.label`}
+                                        short />
                                 </Fragment>
                             }
                         </div>

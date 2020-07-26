@@ -1,4 +1,4 @@
-import { EditorState, Modifier } from 'draft-js';
+import { EditorState, Modifier, RichUtils } from 'draft-js';
 
 export const getSelectionRange = () => {
     const selection = window.getSelection();
@@ -304,4 +304,24 @@ export function findEntities(entityType, contentBlock, callback, contentState) {
         character => entityFilter(character, entityType, contentState),
         callback
     );
+}
+
+export function confirmLink(editorState, url) {
+    const contentState = editorState.getCurrentContent();
+    const contentStateWithEntity = contentState.createEntity(
+        'LINK',
+        'MUTABLE',
+        { url }
+    );
+
+    return EditorState.set(editorState, { currentContent: contentStateWithEntity });
+}
+
+export function removeLink(editorState) {
+    const selection = editorState.getSelection();
+    if (!selection.isCollapsed()) {
+        return RichUtils.toggleLink(editorState, selection, null);
+    } else {
+        return editorState;
+    }
 }

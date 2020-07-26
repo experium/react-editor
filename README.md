@@ -7,7 +7,9 @@ Form editor component
 ### FormBuilder Props
 
 - `components`: custom form editor [fields](#form-editor-field).
+- `getComponents`: map form editor fields.
 - `data`: form editor data.
+- `showSimple`: form editor correct field values.
 - `uploadUrl`: form editor url for file upload.
 - `downloadUrl`: form editor url for file download.
 - `uploadImages`: form editor upload by url images for options.

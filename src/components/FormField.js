@@ -6,9 +6,13 @@ import { isNil } from 'ramda';
 
 import withFileUrlContext from '../hocs/withFileUrlContext';
 
+const required = value => !value ? 'Это поле обязательно для заполнения' : undefined;
+const incorrect = (value, correct) => value !== correct ? 'Неправильный ответ' : undefined;
+
 class FormField extends Component {
     static propTypes = {
         item: PropTypes.object,
+        options: PropTypes.object,
         component: PropTypes.func,
         value: PropTypes.any,
         id: PropTypes.string,
@@ -18,13 +22,17 @@ class FormField extends Component {
     };
 
     renderField = () => {
-        const { id, component: Component, item, fieldType, value, view, downloadUrl } = this.props;
+        const { id, component: Component, item, options, fieldType, value, view, downloadUrl } = this.props;
         const disabled = !isNil(value) || view;
 
         return <Field
             name={id}
             component={Component}
-            validate={value => item.required && !value ? 'Это поле обязательно для заполнения' : undefined}
+            validate={value => (
+                (item.required && required(value))
+                || (item.allowCorrect && (options.correctValidator ? options.correctValidator(value, item.correct) : incorrect(value, item.correct)))
+                || undefined
+            )}
             fieldType={fieldType}
             id={id}
             disabled={disabled}

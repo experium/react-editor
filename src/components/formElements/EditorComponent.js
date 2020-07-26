@@ -100,9 +100,9 @@ export default class EditorComponent extends Component {
     }
 
     toggleInlineStyle = (style, inline) => {
-        const { editorState } = this.state;
+        const { editorState, urlValue } = this.state;
         const newState = style === 'link' ?
-            (inline ? confirmLink(editorState, inline) : removeLink(editorState)) :
+            (inline ? confirmLink(editorState, urlValue) : removeLink(editorState)) :
             contains(style, ALIGNMENTS) ? styleWholeSelectedBlocksModifier(editorState, style, without([style], ALIGNMENTS)) :
                 inline ? RichUtils.toggleInlineStyle(editorState, style) :
                     RichUtils.toggleBlockType(editorState, style);
