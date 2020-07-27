@@ -56,7 +56,7 @@ export class FormGenerator extends Component {
         const showSubmit = any(([ _, item ]) => !path(['staticContent'], find(propEq('type', item.type), components)), toPairs(elements));
 
         return renderFooter ? (
-            renderFooter({ staticContent, index, invalid, formProps, formValues, showSubmit }, this.props)
+            renderFooter({ staticContent, index, invalid, formProps, formValues, showSubmit, page }, this.props)
         ) : (
             <Button.Group>
                 { common.pages && page > 0 &&
