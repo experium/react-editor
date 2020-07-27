@@ -48,36 +48,40 @@ export class FormGenerator extends Component {
         formProps.reset(values);
     }
 
-    renderFooter = ({ staticContent, index, invalid, formProps, formValues }) => {
+    renderFooter = ({ renderFooter, staticContent, index, invalid, formProps, formValues }) => {
         const { data: { common = {}, items, elements }, submitText} = this.props;
         const { page } = this.state;
 
         const components = COMPONENTS_DEFAULTS().concat(this.props.components);
         const showSubmit = any(([ _, item ]) => !path(['staticContent'], find(propEq('type', item.type), components)), toPairs(elements));
 
-        return <Button.Group>
-            { common.pages && page > 0 &&
-                <Button
-                    htmlType='submit'
-                    onClick={this.goBack}>
-                    Назад
-                </Button>
-            }
-            { showSubmit && ((!staticContent && common.everyQuestionSubmit) || (common.pages ? page : index) === items.length - 1) &&
-                <Button
-                    htmlType='submit'
-                    type='primary'>
-                    { submitText || 'Сохранить'}
-                </Button>
-            }
-            { common.pages && page < items.length - 1 &&
-                <Button
-                    htmlType='submit'
-                    onClick={!invalid ? () => this.goNext(formProps, formValues) : null}>
-                    Вперед
-                </Button>
-            }
-        </Button.Group>;
+        return renderFooter ? (
+            renderFooter({ staticContent, index, invalid, formProps, formValues, showSubmit }, this.props)
+        ) : (
+            <Button.Group>
+                { common.pages && page > 0 &&
+                    <Button
+                        htmlType='submit'
+                        onClick={this.goBack}>
+                        Назад
+                    </Button>
+                }
+                { showSubmit && ((!staticContent && common.everyQuestionSubmit) || (common.pages ? page : index) === items.length - 1) &&
+                    <Button
+                        htmlType='submit'
+                        type='primary'>
+                        { submitText || 'Сохранить'}
+                    </Button>
+                }
+                { common.pages && page < items.length - 1 &&
+                    <Button
+                        htmlType='submit'
+                        onClick={!invalid ? () => this.goNext(formProps, formValues) : null}>
+                        Вперед
+                    </Button>
+                }
+            </Button.Group>
+        );
     }
 
     renderRow = (id, index, invalid, formProps, formValues, handleSubmit) => {
@@ -104,7 +108,7 @@ export class FormGenerator extends Component {
                         isField />
                 }
             </Col>
-            { (renderFooter || this.renderFooter)({ staticContent, index, invalid, formProps, formValues, handleSubmit }) }
+            { this.renderFooter({ renderFooter, staticContent, index, invalid, formProps, formValues, handleSubmit }) }
         </Row>;
     }
 
