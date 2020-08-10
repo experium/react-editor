@@ -198,6 +198,13 @@
             left: 2px;
         }
 
+        .ant-checkbox-wrapper.correct .ant-checkbox-inner:after,
+        .ant-checkbox-wrapper.incorrect .ant-checkbox-inner:after,
+        .ant-radio-wrapper.correct .ant-radio-inner:after,
+        .ant-radio-wrapper.incorrect .ant-radio-inner:after {
+            opacity: 0;
+        }
+
         .ant-checkbox-wrapper.correct .ant-checkbox-inner:before,
         .ant-radio-wrapper.correct .ant-radio-inner:before {
             content: '\f00c';
