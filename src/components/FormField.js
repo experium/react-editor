@@ -6,7 +6,7 @@ import { isNil } from 'ramda';
 
 import withFileUrlContext from '../hocs/withFileUrlContext';
 
-const required = value => !value ? 'Это поле обязательно для заполнения' : undefined;
+const required = value => !value ? 'Обязательно для заполнения' : undefined;
 const incorrect = (value, correct) => value !== correct ? 'Неправильный ответ' : undefined;
 
 class FormField extends Component {
