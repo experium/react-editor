@@ -60,7 +60,7 @@ class Checkboxes extends Component {
         return <Draggable key={option.id} draggableId={option.id} index={index} isDragDisabled={!isEditor}>
             { provided =>
                 <div ref={provided.innerRef} {...provided.draggableProps} style={provided.draggableProps.style}>
-                    <div className={cx(styles.optionItem, 'option-item', { 'option-item-correct': allowCorrect && isCorrect })}>
+                    <div className={cx(styles.optionItem, 'option-item', { 'option-item-correct': (allowCorrect || disabled) && isCorrect })}>
                         { isEditor &&
                             <div className={cx(styles.optionReorder, 'option-reorder')} {...provided.dragHandleProps}>
                                 <i className='fa fa-reorder' />
@@ -147,7 +147,7 @@ class Checkboxes extends Component {
                 </div>
             }
             { !!(disabled && incorrect.length) &&
-                <div className={styles.correctAnswers}>
+                <div className={cx('option-correct', styles.correctAnswers)}>
                     <b>Правильные ответы: </b>
                     { correct.map((id, index) =>
                         <span

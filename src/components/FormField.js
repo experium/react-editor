@@ -22,22 +22,25 @@ class FormField extends Component {
     };
 
     renderField = () => {
-        const { id, component: Component, item, options, fieldType, value, view, downloadUrl } = this.props;
+        const { id, component: Component, item, options, fieldType, value, view, noCheckCorrect, downloadUrl } = this.props;
         const disabled = !isNil(value) || view;
 
         return <Field
             name={id}
             component={Component}
-            validate={value => (
+            validate={value => disabled ? undefined : (
                 (item.required && required(value))
-                || (item.allowCorrect && (options.correctValidator ? options.correctValidator(value, item.correct) : incorrect(value, item.correct)))
+                || (!noCheckCorrect && item.allowCorrect && (
+                    options.correctValidator ? options.correctValidator(value, item.correct) : incorrect(value, item.correct)
+                ))
                 || undefined
             )}
             fieldType={fieldType}
             id={id}
             disabled={disabled}
             downloadUrl={downloadUrl}
-            {...item} />;
+            {...item}
+            allowCorrect={!noCheckCorrect && item.allowCorrect} />;
     }
 
     render() {

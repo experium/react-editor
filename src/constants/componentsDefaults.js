@@ -2,7 +2,7 @@ import React from 'react';
 import uniqid from 'uniqid';
 import range from 'ramda/src/range';
 import length from 'ramda/src/length';
-import difference from 'ramda/src/difference';
+import symmetricDifference from 'ramda/src/symmetricDifference';
 
 import Checkboxes, { CheckboxesField } from '../components/formElements/Checkboxes';
 import RadioButtons, { RadioButtonsField } from '../components/formElements/RadioButtons';
@@ -15,7 +15,7 @@ import DownloadFile, { DownloadFile as DownloadFileComponent } from '../componen
 import Pdf, { PdfComponent } from '../components/formElements/Pdf';
 import Image, { ImageComponent } from '../components/formElements/Image';
 
-const arrayIncorrect = (value, correct) => length(difference(correct || [], value || [])) ? 'Неправильный ответ' : undefined;
+const arrayIncorrect = (value, correct) => length(symmetricDifference(value || [], correct || [])) ? 'Неправильный ответ' : undefined;
 
 const renderInfo = (prop = 'label') => props => <div dangerouslySetInnerHTML={{ __html: props[prop] }} />;
 
