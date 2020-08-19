@@ -26,6 +26,7 @@ export class FormGenerator extends Component {
     static defaultProps = {
         data: {},
         values: {},
+        disable: true,
         components: []
     };
 
@@ -64,7 +65,7 @@ export class FormGenerator extends Component {
                 goNext: () => this.goNext(formProps, formValues),
             }, this.props)
         ) : (
-            <Button.Group>
+            <Button.Group className='experium-player-footer'>
                 { common.pages && page > 0 &&
                     <Button
                         htmlType='submit'
@@ -97,7 +98,7 @@ export class FormGenerator extends Component {
     }
 
     renderRow = (id, index, invalid, formProps, formValues, errors, handleSubmit) => {
-        const { data: { elements = {} }, preview, values, view, noCheckCorrect, placeholder, renderFooter } = this.props;
+        const { data: { elements = {} }, preview, values, view, disable, noCheckCorrect, placeholder, renderFooter } = this.props;
         const item = elements[id];
         const options = find(propEq('type', item.type), this.getComponents(placeholder));
         const { staticContent, fieldType, formComponent: Component } = options;
@@ -114,10 +115,10 @@ export class FormGenerator extends Component {
                         options={options}
                         fieldType={fieldType}
                         component={Component}
-                        value={values[id]}
-                        preview={preview}
-                        noCheckCorrect={noCheckCorrect}
                         view={view}
+                        preview={preview}
+                        value={disable ? values[id] : undefined}
+                        noCheckCorrect={noCheckCorrect}
                         isField />
                 }
             </Col>

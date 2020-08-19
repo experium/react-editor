@@ -31,7 +31,7 @@ class FormField extends Component {
             validate={value => disabled ? undefined : (
                 (item.required && required(value))
                 || (!noCheckCorrect && item.allowCorrect && (
-                    options.correctValidator ? options.correctValidator(value, item.correct) : incorrect(value, item.correct)
+                    options.correctValidator ? options.correctValidator(value, item.correct, item) : incorrect(value, item.correct)
                 ))
                 || undefined
             )}

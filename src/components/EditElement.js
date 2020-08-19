@@ -45,7 +45,9 @@ class EditElement extends Component {
 
         return staticContent ?
             <FileUrlContext.Consumer>
-                {fileContext => <Component {...item} {...fileContext} id='preview' />}
+                {fileContext => (
+                    <Component {...item} {...fileContext} id='preview' />
+                )}
             </FileUrlContext.Consumer> :
             <FormField
                 key={JSON.stringify(item)}
