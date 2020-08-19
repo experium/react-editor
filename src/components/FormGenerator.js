@@ -97,7 +97,7 @@ export class FormGenerator extends Component {
         );
     }
 
-    renderRow = (id, index, invalid, formProps, formValues, errors, handleSubmit) => {
+    renderRow = (id, index, invalid, formProps, formValues, errors, submitFailed, handleSubmit) => {
         const { data: { elements = {} }, preview, values, view, disable, noCheckCorrect, placeholder, renderFooter } = this.props;
         const item = elements[id];
         const options = find(propEq('type', item.type), this.getComponents(placeholder));
@@ -122,7 +122,7 @@ export class FormGenerator extends Component {
                         isField />
                 }
             </Col>
-            { this.renderFooter({ renderFooter, staticContent, index, invalid, formProps, formValues, errors, handleSubmit }) }
+            { this.renderFooter({ renderFooter, staticContent, index, invalid, formProps, formValues, errors, submitFailed, handleSubmit }) }
         </Row>;
     }
 
@@ -148,11 +148,11 @@ export class FormGenerator extends Component {
                         onSubmit={this.onSubmit}
                         initialValues={values}
                         subscription={{ submitting: true, submitFailed: true, invalid: true, errors: true, values: true }}
-                        render={({ handleSubmit, invalid, values, form, errors }) =>
+                        render={({ handleSubmit, invalid, values, form, errors, submitFailed }) =>
                             <FormComponent onFinish={handleSubmit}>
                                 <DragDropContext>
                                     { addIndex(filter)((item, index) => common.pages ? index === page : true, items)
-                                        .map((row, index) => this.renderRow(row, index, invalid, form, values, errors, handleSubmit))
+                                        .map((row, index) => this.renderRow(row, index, invalid, form, values, errors, submitFailed, handleSubmit))
                                     }
                                 </DragDropContext>
                             </FormComponent>
