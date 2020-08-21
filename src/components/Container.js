@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import cx from 'classnames';
-import { find, propEq } from 'ramda';
+import { find, propEq, path } from 'ramda';
 
 import styles from '../css/formBuilder.scss';
 import withComponentsContext from '../hocs/withComponentsContext';
@@ -19,8 +19,13 @@ class Container extends Component {
 
     renderItem = (id, dragHandleProps, isDraggingOver) => {
         const { removeItem, editItem, elements, placeholder, simpleView, editAllItem, components } = this.props;
-        const item = elements[id];
+        const item = path([id], elements);
         const element = find(propEq('type', item.type), components);
+
+        if (!element) {
+            return null;
+        }
+
         const Component = element.component;
 
         return <Component

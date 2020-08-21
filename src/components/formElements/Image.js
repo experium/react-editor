@@ -47,15 +47,17 @@ export class ImageComponent extends Component {
         const { cover, repeat, downloadUrl } = this.props;
         const url = pathOr({}, ['url'], this.props);
 
-        return url ? <div ref={node => this.container = node}
-            className='imageElement'
-            style={{
-                width: '100%',
-                height: cover ? this.state.coverHeight : this.state.height,
-                backgroundImage: `url('${url.id ? downloadUrl(url.id) : url.body}')`,
-                backgroundSize: cover ? 'cover' : 'contain',
-                backgroundRepeatX: repeat ? 'repeat' : 'no-repeat'
-            }} /> : null;
+        return url ? <div className='imageContainer'>
+            <div ref={node => this.container = node}
+                className='imageElement'
+                style={{
+                    width: '100%',
+                    height: cover ? this.state.coverHeight : this.state.height,
+                    backgroundImage: `url('${url.id ? downloadUrl(url.id) : url.body}')`,
+                    backgroundSize: cover ? 'cover' : 'contain',
+                    backgroundRepeatX: repeat ? 'repeat' : 'no-repeat'
+                }} />
+        </div> : null;
     }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, Form as FormComponent } from 'antd';
-import { find, propEq, any, toPairs, concat, filter, addIndex, path } from 'ramda';
+import { find, propEq, any, toPairs, concat, filter, addIndex, path, pathOr } from 'ramda';
 import { DragDropContext } from 'react-beautiful-dnd';
 import cx from 'classnames';
 import { Form } from 'react-final-form';
@@ -99,8 +99,13 @@ export class FormGenerator extends Component {
 
     renderRow = (id, index, invalid, formProps, formValues, errors, submitFailed, handleSubmit) => {
         const { data: { elements = {} }, preview, values, view, disable, noCheckCorrect, placeholder, renderFooter } = this.props;
-        const item = elements[id];
+        const item = pathOr({}, [id], elements);
         const options = find(propEq('type', item.type), this.getComponents(placeholder));
+
+        if (!options) {
+            return null;
+        }
+
         const { staticContent, fieldType, formComponent: Component } = options;
 
         return <Row key={`row-${id}`}>
@@ -117,7 +122,7 @@ export class FormGenerator extends Component {
                         component={Component}
                         view={view}
                         preview={preview}
-                        value={disable ? values[id] : undefined}
+                        value={disable ? path([id], values) : undefined}
                         noCheckCorrect={noCheckCorrect}
                         isField />
                 }
