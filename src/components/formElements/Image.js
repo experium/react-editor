@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { path, pathOr } from 'ramda';
+import cx from 'classnames';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 
@@ -47,16 +48,31 @@ export class ImageComponent extends Component {
         const { cover, repeat, downloadUrl } = this.props;
         const url = pathOr({}, ['url'], this.props);
 
-        return url ? <div className='imageContainer'>
-            <div ref={node => this.container = node}
-                className='imageElement'
-                style={{
-                    width: '100%',
-                    height: cover ? this.state.coverHeight : this.state.height,
-                    backgroundImage: `url('${url.id ? downloadUrl(url.id) : url.body}')`,
-                    backgroundSize: cover ? 'cover' : 'contain',
-                    backgroundRepeatX: repeat ? 'repeat' : 'no-repeat'
-                }} />
+        return url ? <div
+            className={cx('imageContainer', { imageRepeat: repeat, imageCover: cover })}
+            style={{ width: '100%' }}
+            ref={node => this.container = node}
+        >
+            { repeat ? (
+                <div
+                    className='imageElement'
+                    style={{
+                        width: '100%',
+                        height: cover ? this.state.coverHeight : this.state.height,
+                        backgroundImage: `url('${url.id ? downloadUrl(url.id) : url.body}')`,
+                        backgroundSize: cover ? 'cover' : 'contain',
+                        backgroundRepeatX: repeat ? 'repeat' : 'no-repeat'
+                    }}
+                />
+            ) : (
+                <img
+                    src={url.id ? downloadUrl(url.id) : url.body}
+                    style={{
+                        width: '100%',
+                        height: cover ? this.state.coverHeight : this.state.height,
+                    }}
+                />
+            )}
         </div> : null;
     }
 }

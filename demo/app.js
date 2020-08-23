@@ -25,7 +25,7 @@ ReactDOM.render(
         <FormBuilder
             uploadUrl='/api/files'
             downloadUrl={id => `/api/files/${id}/view`}
-            uploadImages={true}
+            uploadImages={false}
             placeholder='Тестовый выбор'
             submitText='Отправить'
             data={saveState && state ? JSON.parse(state) : undefined}
