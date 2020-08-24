@@ -37,7 +37,9 @@ class PdfField extends Component {
     next = () => this.setState(prev => ({ pageNumber: prev.pageNumber + 1 }));
 
     getWidth = () => {
-        return this.props.width || (this.pageRef ? this.pageRef.ref.clientWidth : 450);
+        return this.props.width || (this.pageRef ? (
+            this.pageRef.ref.clientWidth
+        ) : pathOr(450, ['clientHeight'], this.container));
     }
 
     openFullPdf = () => {
@@ -61,7 +63,7 @@ class PdfField extends Component {
         const { pageNumber, numPages, loaded } = this.state;
         const pages = this.getPages();
 
-        return <div className={cx(styles.pdf, 'pdf-component')}>
+        return <div className={cx(styles.pdf, 'pdf-component')} ref={node => this.container = node}>
             <div className={cx(styles.pdfPageButtons, 'pdf-page-buttons')}>
                 <Button.Group>
                     { !allPages &&
