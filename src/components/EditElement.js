@@ -83,6 +83,7 @@ class EditElement extends Component {
                                                 name={item.prop}
                                                 component={FIELDS[item.type]}
                                                 label={item.label}
+                                                description={item.description}
                                                 variantPlaceholder={placeholder}
                                                 {...(item.props || {})} /> :
                                             <Field

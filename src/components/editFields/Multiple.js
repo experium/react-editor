@@ -34,10 +34,9 @@ export default class Multiple extends Component {
     }
 
     render() {
-        const { label, fields, editor } = this.props;
+        const { label, fields, editor, description } = this.props;
 
-        return <Form.Item
-            label={label}>
+        return <Form.Item label={label}>
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId='multiple'>
                     { provided =>
@@ -67,6 +66,14 @@ export default class Multiple extends Component {
                                                     }
                                                 </div>
                                             </div>
+                                            { description && (
+                                                <div className={cx(styles.itemDescription)}>
+                                                    <Field
+                                                        name={`${name}.description`}
+                                                        component={editor ? MceEditor : Input}
+                                                        short />
+                                                </div>
+                                            )}
                                         </div>
                                     }
                                 </Draggable>
