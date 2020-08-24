@@ -39,7 +39,7 @@ class PdfField extends Component {
     getWidth = () => {
         return this.props.width || (this.pageRef ? (
             this.pageRef.ref.clientWidth
-        ) : pathOr(450, ['clientHeight'], this.container));
+        ) : pathOr(450, ['clientWidth'], this.container));
     }
 
     openFullPdf = () => {
