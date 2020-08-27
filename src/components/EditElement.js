@@ -76,7 +76,7 @@ class EditElement extends Component {
                         <div className={cx(styles.editorCol, 'edit-element-col', { [styles.editorColHidePreview]: hidePreview })}>
                             <FormComponent onFinish={handleSubmit}>
                                 <div className={cx(styles.editorFields, 'edit-element-fields')}>
-                                    { fields.map(item => (path(['props', 'cond'], item) ? item.props.cond(values) : true) &&
+                                    { fields.map(item => (path(['props', 'cond'], item) ? item.props.cond(values) : true) && FIELDS[item.type] ?
                                         (item.fieldArray ?
                                             <FieldArray
                                                 key={`field-${item.prop}`}
@@ -93,7 +93,8 @@ class EditElement extends Component {
                                                 label={item.label}
                                                 placeholder={placeholder}
                                                 {...(item.props || {})}
-                                                hidePreview={hidePreview} />)
+                                                hidePreview={hidePreview} />
+                                        ) : null
                                     )}
                                 </div>
                                 <div className={cx(styles.editorFooter, 'edit-element-footer')}>

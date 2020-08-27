@@ -109,7 +109,7 @@ const COMPONENTS_DEFAULTS = placeholder => ([
         fields: [
             { type: 'editor', label: 'Название поля', prop: 'label', props: { short: true }},
             { type: 'input', label: 'Значение по-умолчанию', prop: 'defaultValue', props: { number: true }},
-            { type: 'input', label: 'Шаг', prop: 'step', props: { number: true }},
+            { type: 'input', label: 'Шаг', prop: 'step', props: { number: true, min: 1 }},
             { type: 'input', label: 'Минимальное значение', prop: 'minValue', props: { number: true }},
             { type: 'input', label: 'Название минимального значения', prop: 'minLabel'},
             { type: 'input', label: 'Максимальное значение', prop: 'maxValue', props: { number: true }},
