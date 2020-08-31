@@ -26,6 +26,7 @@ ReactDOM.render(
             uploadUrl='/api/files'
             downloadUrl={id => `/api/files/${id}/view`}
             uploadImages={false}
+            withoutUrl={true}
             placeholder='Тестовый выбор'
             submitText='Отправить'
             data={saveState && state ? JSON.parse(state) : undefined}

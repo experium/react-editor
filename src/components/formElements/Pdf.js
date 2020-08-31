@@ -37,9 +37,11 @@ class PdfField extends Component {
     next = () => this.setState(prev => ({ pageNumber: prev.pageNumber + 1 }));
 
     getWidth = () => {
+        const clientWidth = pathOr(450, ['clientWidth'], this.container);
+
         return this.props.width || (this.pageRef ? (
-            this.pageRef.ref.clientWidth
-        ) : pathOr(450, ['clientWidth'], this.container));
+            pathOr(clientWidth, ['ref', 'clientWidth'], this.pageRef)
+        ) : clientWidth);
     }
 
     openFullPdf = () => {
@@ -113,7 +115,7 @@ class PdfField extends Component {
         const { file, label } = this.props;
 
         return <Fragment>
-            <div dangerouslySetInnerHTML={{ __html: label }} />
+            <div className='pdf-view-field' dangerouslySetInnerHTML={{ __html: label }} />
             { file ? this.renderPdf() : null }
         </Fragment>;
     }
