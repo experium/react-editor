@@ -150,6 +150,6 @@ export default class EditorComponent extends Component {
                         handleKeyCommand={this.handleKeyCommand}
                         blockStyleFn={this.blockStyleFn} />
                 </div>
-            </div> : <div dangerouslySetInnerHTML={{ __html: this.props[path] }} />;
+            </div> : <div className='editor-view' dangerouslySetInnerHTML={{ __html: this.props[path] }} />;
     }
 }
