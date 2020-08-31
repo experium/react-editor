@@ -30,6 +30,9 @@ ReactDOM.render(
             submitText='Отправить'
             data={saveState && state ? JSON.parse(state) : undefined}
             onChange={data => saveState && localStorage.setItem('editor:data', JSON.stringify(data))}
+            mceOnInit={editor => {
+                editor.target.editorCommands.execCommand('fontSize', false, '17px');
+            }}
         />
     ),
     document.getElementById('root')

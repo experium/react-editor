@@ -12,7 +12,7 @@ class MceEditor extends Component {
 
         return <div className={cx({ [styles.editorInputShort]: short, [styles.editorInput]: !hidePreview })}>
             <MceLanguageUrl.Consumer>
-                { languageUrl =>
+                { ({ mceLanguageUrl, mceOnInit }) =>
                     <Editor
                         value={value}
                         onEditorChange={onChange}
@@ -43,7 +43,7 @@ class MceEditor extends Component {
                                 p { margin-top: 0; margin-bottom: 1em; color: rgba(0, 0, 0, 0.65); font-size: 14px; font-family: 'Roboto', sans-serif; }
                             ` : null,
                             content_css: ['https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic'],
-                            language_url: languageUrl || '/translations/ru.js',
+                            language_url: mceLanguageUrl || '/translations/ru.js',
                             toolbar_drawer: 'sliding',
                             font_formats: 'Andale Mono=andale mono,monospace;' +
                                 'Arial=arial,helvetica,sans-serif;' +
@@ -75,6 +75,10 @@ class MceEditor extends Component {
                             setup: editor => {
                                 editor.on('init', ed => {
                                     ed.target.editorCommands.execCommand('fontName', false, 'Roboto');
+
+                                    if (mceOnInit) {
+                                        mceOnInit(ed);
+                                    }
                                 });
                                 editor.on('BeforeSetContent', e => {
                                     if (e.content.startsWith('<table ')) {

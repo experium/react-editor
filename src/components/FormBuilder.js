@@ -74,7 +74,19 @@ class FormBuilderComponent extends Component {
     }
 
     render() {
-        const { items, elements, addItem, components, commonSettings, uploadUrl, downloadUrl, uploadImages, submitText, mceLanguageUrl } = this.props;
+        const {
+            items,
+            elements,
+            addItem,
+            components,
+            commonSettings,
+            uploadUrl,
+            downloadUrl,
+            uploadImages,
+            submitText,
+            mceLanguageUrl,
+            mceOnInit,
+        } = this.props;
 
         return <div className={cx(styles.experiumPlayerBuilder, 'experium-player-builder')}>
             <div className={cx(styles.reactFormBuilder, 'react-form-builder clearfix')}>
@@ -98,7 +110,7 @@ class FormBuilderComponent extends Component {
                     downloadUrl,
                     uploadImages,
                 }}>
-                    <MceLanguageUrl.Provider value={mceLanguageUrl}>
+                    <MceLanguageUrl.Provider value={{ mceLanguageUrl, mceOnInit }}>
                         <DragDropContext onDragEnd={this.onDragEnd}>
                             <Container {...this.props} />
                             <Toolbar addItem={addItem} />
