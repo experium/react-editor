@@ -76,6 +76,11 @@ class MceEditor extends Component {
                                 editor.on('init', ed => {
                                     ed.target.editorCommands.execCommand('fontName', false, 'Roboto');
                                 });
+                                editor.on('BeforeSetContent', e => {
+                                    if (e.content.startsWith('<table ')) {
+                                        e.content = `<div class="table-wrap">${e.content}</div>`;
+                                    }
+                                });
                             }
                         }} />
                 }
