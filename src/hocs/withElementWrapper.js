@@ -55,13 +55,13 @@ export const withElementWrapper = WrappedComponent => {
 
         render() {
             const { removeItem, id, type, dragHandleProps, placeholder, simpleView, item, components, isEditor } = this.props;
-            const { staticContent, ableCorrect, renderInfo, name, icon } = find(propEq('type', type), components);
+            const { staticContent, ableCorrect, renderInfo, name, icon } = find(propEq('type', type), components) || {};
 
             return <div className={cx(styles.sortableRowWrapper, 'sortable-row-wrapper')}>
                 <div className={cx(styles.sortableRow, 'sortable-row')}>
                     { !isEditor && <Fragment>
                         <EditModalContext.Consumer>
-                            { ({ setOpened }) =>
+                            { ({ setOpened }) => !!name &&
                                 <button type='button' className={cx(styles.toolbarEditBtn, 'toolbar-edit-btn')} onClick={() => setOpened(id)}>
                                     <i className='fa fa-edit'></i>
                                 </button>

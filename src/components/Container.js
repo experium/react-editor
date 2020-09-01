@@ -6,6 +6,7 @@ import { find, propEq, path } from 'ramda';
 
 import styles from '../css/formBuilder.scss';
 import withComponentsContext from '../hocs/withComponentsContext';
+import EmptyComponent from './formElements/EmptyComponent';
 
 class Container extends Component {
     static propTypes = {
@@ -22,11 +23,7 @@ class Container extends Component {
         const item = path([id], elements);
         const element = find(propEq('type', item.type), components);
 
-        if (!element) {
-            return null;
-        }
-
-        const Component = element.component;
+        const Component = element ? element.component : EmptyComponent;
 
         return <Component
             {...item}
@@ -39,6 +36,17 @@ class Container extends Component {
             placeholder={placeholder}
             isDraggingOver={isDraggingOver}
             simpleView={simpleView} />;
+    }
+
+    getElement = (id) => {
+        const { elements, components } = this.props;
+        const item = path([id], elements);
+
+        if (!element) {
+            return null;
+        }
+
+        return element;
     }
 
     render() {
