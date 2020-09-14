@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { find, propEq, path } from 'ramda';
+import { find, propEq, path, omit } from 'ramda';
 import { Form, Field } from 'react-final-form';
 import { Form as FormComponent, Button, Popconfirm } from 'antd';
 import arrayMutators from 'final-form-arrays';
@@ -50,7 +50,7 @@ class EditElement extends Component {
                 )}
             </FileUrlContext.Consumer> :
             <FormField
-                key={JSON.stringify(item)}
+                key={JSON.stringify(omit(['correct'], item))}
                 id={item.allowCorrect ? 'correct' : 'preview'}
                 isField={!!item.allowCorrect}
                 item={item}

@@ -58,7 +58,6 @@ const COMPONENTS_DEFAULTS = placeholder => ([
             { type: 'multiple', label: 'Ответы', prop: 'options', fieldArray: true },
             { type: 'input', label: 'Вес вопроса', prop: 'questionWeight', props: { number: true }},
             { type: 'switch', label: 'Обязательное поле', prop: 'required' },
-            { type: 'switch', label: 'Правильный ответ', prop: 'allowCorrect' },
             { type: 'switch', label: 'Выводить варианты в случайном порядке', prop: 'allowShuffle' },
             { type: 'switch', label: 'Отображать варианты по горизонтали', prop: 'inline' }
         ]
@@ -84,7 +83,6 @@ const COMPONENTS_DEFAULTS = placeholder => ([
             { type: 'multiple', label: 'Ответы', prop: 'options', fieldArray: true },
             { type: 'input', label: 'Вес вопроса', prop: 'questionWeight', props: { number: true }},
             { type: 'switch', label: 'Обязательное поле', prop: 'required' },
-            { type: 'switch', label: 'Правильный ответ', prop: 'allowCorrect' },
             { type: 'switch', label: 'Выводить варианты в случайном порядке', prop: 'allowShuffle' },
             { type: 'switch', label: 'Отображать варианты по горизонтали', prop: 'inline' }
         ]
