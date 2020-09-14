@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { path, pathOr } from 'ramda';
+import { isEmpty, path, pathOr } from 'ramda';
 import cx from 'classnames';
+import Zoom from 'react-medium-image-zoom';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 
@@ -48,7 +49,7 @@ export class ImageComponent extends Component {
         const { cover, repeat, downloadUrl } = this.props;
         const url = pathOr({}, ['url'], this.props);
 
-        return url ? <div
+        return url && !isEmpty(url) ? <div
             className={cx('imageContainer', { imageRepeat: repeat, imageCover: cover })}
             style={{ width: '100%' }}
             ref={node => this.container = node}
@@ -65,13 +66,15 @@ export class ImageComponent extends Component {
                     }}
                 />
             ) : (
-                <img
-                    src={url.id ? downloadUrl(url.id) : url.body}
-                    style={{
-                        width: '100%',
-                        height: cover ? this.state.coverHeight : this.state.height,
-                    }}
-                />
+                <Zoom>
+                    <img
+                        src={url.id ? downloadUrl(url.id) : url.body}
+                        style={{
+                            width: '100%',
+                            height: cover ? this.state.coverHeight : this.state.height
+                        }}
+                    />
+                </Zoom>
             )}
         </div> : null;
     }
