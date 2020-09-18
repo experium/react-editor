@@ -14,16 +14,17 @@ class VideoPlayer extends Component {
 
     componentDidMount() {
         const minWidth = this.container.clientWidth;
+        const height = this.props.height || (this.props.width && (this.props.width / 3)) || (minWidth / 3);
 
         this.setState({
             minWidth,
-            minHeight: (((100 * minWidth) / this.props.width) * this.props.height) / 100
+            minHeight: (((100 * minWidth) / (this.props.width || minWidth)) * height) / 100
         });
     }
 
     render() {
         const { isDraggingOver, width, height, src } = this.props;
-        const useMinSizes = width > this.state.minWidth;
+        const useMinSizes = !(width || height) || (width > this.state.minWidth);
 
         return <div className={cx({ 'dragging-over': isDraggingOver })} style={{ marginBottom: 15 }} ref={node => this.container = node}>
             <Player url={src} width={useMinSizes ? this.state.minWidth : width} height={useMinSizes ? this.state.minHeight : height} controls />
