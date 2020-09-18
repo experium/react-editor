@@ -6,6 +6,7 @@ import { FormBuilder, FormGenerator } from '../src/index';
 const saveState = !!window.location.search;
 const isPreview = saveState && window.location.search.includes('preview=1');
 const state = localStorage.getItem('editor:data');
+const uploadImages = false;
 
 ReactDOM.render(
     isPreview ? (
@@ -23,10 +24,10 @@ ReactDOM.render(
         />
     ) : (
         <FormBuilder
-            uploadUrl='/api/files'
+            uploadUrl={uploadImages ? '/api/files' : undefined}
             downloadUrl={id => `/api/files/${id}/view`}
-            uploadImages={false}
-            withoutUrl={true}
+            uploadImages={uploadImages}
+            withoutUrl={!uploadImages}
             placeholder='Тестовый выбор'
             submitText='Отправить'
             data={saveState && state ? JSON.parse(state) : undefined}
