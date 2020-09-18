@@ -15,7 +15,7 @@ class MceEditor extends Component {
                 { ({ mceLanguageUrl, mceOnInit }) =>
                     <Editor
                         value={value}
-                        onEditorChange={onChange}
+                        onEditorChange={(value, event) => onChange(value || null, event)}
                         inline={!hidePreview}
                         init={{
                             plugins: 'autoresize image lists link table code paste',
