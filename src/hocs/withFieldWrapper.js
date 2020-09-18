@@ -21,7 +21,7 @@ export default WrappedComponent =>
             const showError = invalid && submitFailed;
 
             return <Form.Item
-                label={label ? <span dangerouslySetInnerHTML={{ __html: label }} /> : null}
+                label={label ? <div dangerouslySetInnerHTML={{ __html: label }} /> : null}
                 colon={false}
                 required={required}
                 validateStatus={showError ? 'error' : null}
