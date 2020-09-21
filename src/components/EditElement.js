@@ -58,6 +58,7 @@ class EditElement extends Component {
                 fieldType={item.type}
                 component={Component}
                 preview
+                noCheckCorrect={true}
                 view={false} />;
     }
 
