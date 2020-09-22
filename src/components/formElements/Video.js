@@ -13,8 +13,17 @@ class VideoPlayer extends Component {
     };
 
     componentDidMount() {
+        this.setSize();
+        window.addEventListener('resize', this.setSize);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.setSize);
+    }
+
+    setSize = () => {
         const minWidth = this.container.clientWidth;
-        const height = this.props.height || (this.props.width && (this.props.width / 3)) || (minWidth / 3);
+        const height = this.props.height || (this.props.width && (this.props.width / 3)) || ((2 * minWidth) / 3);
 
         this.setState({
             minWidth,
