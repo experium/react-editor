@@ -4,6 +4,7 @@ import { DeleteOutlined, UploadOutlined } from '@ant-design/icons';
 
 import withFieldWrapper from '../../hocs/withFieldWrapper';
 import withFileUrlContext from '../../hocs/withFileUrlContext';
+import { getUrl } from '../../utils/files';
 
 class Uploader extends Component {
     state = {
@@ -47,7 +48,7 @@ class Uploader extends Component {
     render() {
         const { input: { value }, uploadUrl, uploadImages, accept, withoutUrl } = this.props;
         const props = uploadUrl && (!withoutUrl || uploadImages) ? {
-            action: uploadUrl,
+            action: getUrl(uploadUrl),
             onChange: this.onChange
         } : {
             beforeUpload: this.beforeUpload

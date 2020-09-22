@@ -24,7 +24,7 @@ ReactDOM.render(
         />
     ) : (
         <FormBuilder
-            uploadUrl={uploadImages ? '/api/files' : undefined}
+            uploadUrl={() => uploadImages ? '/api/files' : undefined}
             downloadUrl={id => `/api/files/${id}/view`}
             uploadImages={uploadImages}
             withoutUrl={!uploadImages}

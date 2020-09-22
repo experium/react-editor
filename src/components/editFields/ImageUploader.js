@@ -6,6 +6,7 @@ import { CloseOutlined, FileImageOutlined } from '@ant-design/icons';
 import styles from '../../css/imageUploader.scss';
 
 import withFileUrlContext from '../../hocs/withFileUrlContext';
+import { getUrl } from '../../utils/files';
 
 class ImageUploader extends Component {
     state = {
@@ -58,7 +59,7 @@ class ImageUploader extends Component {
         <Upload
             showUploadList={false}
             accept='image/*'
-            action={this.props.uploadUrl}
+            action={getUrl(this.props.uploadUrl)}
             onChange={this.onChange}>
             <Button style={{ color: this.state.error ? 'red' : '' }} icon={<FileImageOutlined />} />
         </Upload>

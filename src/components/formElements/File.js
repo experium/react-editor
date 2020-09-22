@@ -5,6 +5,7 @@ import { DownloadOutlined, UploadOutlined, DeleteOutlined } from '@ant-design/ic
 import { withElementWrapper } from '../../hocs/withElementWrapper';
 import withFieldWrapper from '../../hocs/withFieldWrapper';
 import withFileUrlContext from '../../hocs/withFileUrlContext';
+import { getUrl } from '../../utils/files';
 
 class File extends Component {
     state = {
@@ -39,7 +40,7 @@ class File extends Component {
     render() {
         const { input: { value }, uploadUrl, downloadUrl } = this.props;
         const props = uploadUrl ? {
-            action: uploadUrl,
+            action: getUrl(uploadUrl),
             onChange: this.onChange
         } : {
             beforeUpload: this.beforeUpload
