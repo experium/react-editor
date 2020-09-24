@@ -18,7 +18,7 @@ class RadioButtons extends Component {
             onChange={this.onChange}>
             { options.map(option =>
                 <Radio.Button value={option} key={`option-${option}`}>
-                    { option }
+                    { option || '-' }
                 </Radio.Button>
             )}
         </Radio.Group>;

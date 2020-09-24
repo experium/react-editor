@@ -23,17 +23,20 @@ class VideoPlayer extends Component {
 
     setSize = () => {
         const minWidth = this.container.clientWidth;
-        const height = this.props.height || (this.props.width && (this.props.width / 3)) || ((2 * minWidth) / 3);
+        const minHeight = (9 * minWidth) / 16;
+        const height = this.props.height || (this.props.width && (this.props.width / 3)) || minHeight;
 
         this.setState({
             minWidth,
-            minHeight: (((100 * minWidth) / (this.props.width || minWidth)) * height) / 100
+            minHeight: this.props.responsive ?
+                (((100 * minWidth) / minWidth) * minHeight) / 100
+                : (((100 * minWidth) / (this.props.width || minWidth)) * height) / 100
         });
     }
 
     render() {
-        const { isDraggingOver, width, height, src } = this.props;
-        const useMinSizes = !(width || height) || (width > this.state.minWidth);
+        const { isDraggingOver, width, height, responsive, src } = this.props;
+        const useMinSizes = responsive || !(width || height) || (width > this.state.minWidth);
 
         return <div className={cx({ 'dragging-over': isDraggingOver })} style={{ marginBottom: 15 }} ref={node => this.container = node}>
             <Player url={src} width={useMinSizes ? this.state.minWidth : width} height={useMinSizes ? this.state.minHeight : height} controls />
@@ -57,7 +60,7 @@ export class Video extends Component {
     }
 
     render() {
-        const { src, isEditor, isDraggingOver, width, height } = this.props;
+        const { src, isEditor, isDraggingOver, responsive, width, height } = this.props;
 
         return <div className={cx(styles.video, 'video')}>
             { isEditor &&
@@ -67,7 +70,13 @@ export class Video extends Component {
                     placeholder='Вставьте ссылку на видео с youtube' />
             }
             { src ? (
-                <VideoPlayer isDraggingOver={isDraggingOver} width={width} height={height} src={src} />
+                <VideoPlayer
+                    isDraggingOver={isDraggingOver}
+                    responsive={responsive}
+                    width={width}
+                    height={height}
+                    src={src}
+                />
             ) : null}
         </div>;
     }

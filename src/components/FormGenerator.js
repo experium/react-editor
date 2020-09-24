@@ -108,7 +108,10 @@ export class FormGenerator extends Component {
 
         const { staticContent, fieldType, formComponent: Component } = options;
 
-        return <Row key={`row-${id}`}>
+        return <Row
+            key={`row-${id}`}
+            style={item.float ? { float: item.float || 'none', width: `${item.width}%` } : undefined}
+        >
             <Col span={24}>
                 { staticContent ?
                     <FileUrlContext.Consumer>

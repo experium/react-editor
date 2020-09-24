@@ -124,13 +124,15 @@ const COMPONENTS_DEFAULTS = placeholder => ([
         formComponent: VideoComponent,
         staticContent: true,
         props: {
+            responsive: true,
             width: 560,
             height: 350
         },
         fields: [
             { type: 'input', label: 'Ссылка на видео', prop: 'src' },
             { type: 'input', label: 'Высота', prop: 'height', props: { number: true }},
-            { type: 'input', label: 'Ширина', prop: 'width', props: { number: true }}
+            { type: 'input', label: 'Ширина', prop: 'width', props: { number: true }},
+            { type: 'switch', label: 'Адаптивный размер', prop: 'responsive' },
         ]
     },
     {
@@ -188,6 +190,8 @@ const COMPONENTS_DEFAULTS = placeholder => ([
         staticContent: true,
         fields: [
             { type: 'uploader', label: 'Изображение', prop: 'url', props: { withoutUrl: true, accept: 'image/*' }},
+            { type: 'radiobuttons', label: 'Выравнивание текста', prop: 'float', props: { options: ['left', null, 'right']} },
+            { type: 'input', label: 'Ширина (%)', prop: 'width', props: { number: true, min: 0, max: 100 } },
             { type: 'switch', label: 'Растянуть на всю ширину', prop: 'cover' },
             { type: 'switch', label: 'Повторять по горизонтали', prop: 'repeat' }
         ]

@@ -4,6 +4,7 @@ import cx from 'classnames';
 import Zoom from 'react-medium-image-zoom';
 
 import { withElementWrapper } from '../../hocs/withElementWrapper';
+import styles from '../../css/image.scss';
 
 export class ImageComponent extends Component {
     state = {
@@ -46,31 +47,39 @@ export class ImageComponent extends Component {
     }
 
     render() {
-        const { cover, repeat, downloadUrl } = this.props;
+        const { id, width, cover, float, repeat, downloadUrl } = this.props;
         const url = pathOr({}, ['url'], this.props);
+        const isPreview = (id === 'preview');
 
         return url && !isEmpty(url) ? <div
-            className={cx('imageContainer', { imageRepeat: repeat, imageCover: cover })}
-            style={{ width: '100%' }}
+            className={cx(
+                'imageContainer',
+                { [styles.imageFull]: (float && !isPreview) || (cover && !float) },
+                { imageRepeat: repeat, imageCover: cover }
+            )}
+            style={{
+                width: '100%',
+                textAlign: float,
+            }}
             ref={node => this.container = node}
         >
             { repeat ? (
                 <div
                     className='imageElement'
                     style={{
-                        width: '100%',
+                        width: width && !float ? `${width}%` : cover || float ? '100%' : 'auto',
                         height: cover ? this.state.coverHeight : this.state.height,
                         backgroundImage: `url('${url.id ? downloadUrl(url.id) : url.body}')`,
                         backgroundSize: cover ? 'cover' : 'contain',
-                        backgroundRepeatX: repeat ? 'repeat' : 'no-repeat'
+                        backgroundRepeatX: repeat ? 'repeat' : 'no-repeat',
                     }}
                 />
             ) : (
-                <Zoom>
+                <Zoom className='imageZoom'>
                     <img
                         src={url.id ? downloadUrl(url.id) : url.body}
                         style={{
-                            width: '100%',
+                            width: width && !float ? `${width}%` : cover || float ? '100%' : 'auto',
                             height: cover ? this.state.coverHeight : this.state.height
                         }}
                     />
