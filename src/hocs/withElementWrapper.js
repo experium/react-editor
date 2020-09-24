@@ -15,6 +15,7 @@ export const withElementWrapper = WrappedComponent => {
     class ElementWrapper extends Component {
         static propTypes = {
             removeItem: PropTypes.func,
+            copyItem: PropTypes.func,
             editItem: PropTypes.func,
             id: PropTypes.oneOfType([
                 PropTypes.number,
@@ -54,7 +55,7 @@ export const withElementWrapper = WrappedComponent => {
         }
 
         render() {
-            const { removeItem, id, type, dragHandleProps, placeholder, simpleView, item, components, isEditor } = this.props;
+            const { removeItem, copyItem, id, type, dragHandleProps, placeholder, simpleView, item, components, isEditor } = this.props;
             const { staticContent, ableCorrect, renderInfo, name, icon } = find(propEq('type', type), components) || {};
 
             return <div className={cx(styles.sortableRowWrapper, 'sortable-row-wrapper')}>
@@ -67,6 +68,9 @@ export const withElementWrapper = WrappedComponent => {
                                 </button>
                             }
                         </EditModalContext.Consumer>
+                        { !!copyItem && <button type='button' className={cx(styles.toolbarCopyBtn, 'toolbar-copy-btn')} onClick={() => copyItem(id)}>
+                            <i className='fa fa-copy'></i>
+                        </button>}
                         <button type='button' className={cx(styles.toolbarRemoveBtn, 'toolbar-remove-btn')} onClick={() => removeItem(id)}>
                             <i className='fa fa-remove'></i>
                         </button>

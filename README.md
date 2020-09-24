@@ -15,6 +15,7 @@ Form editor component
 - `uploadImages`: form editor upload by url images for options.
 - `placeholder`: default text string for new items in radio buttons and checkboxes.
 - `onChange`: `onChange` handler will be called when form data will be changed.
+- `onCopy`: `onCopy` handler will be called when copy element.
 - `onPreviewOpen`: `onPreviewOpen` handler will be called when preview modal will be opened.
 - `onPreviewClose`: `onPreviewClose` handler will be called when preview modal will be closed.
 

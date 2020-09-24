@@ -4,7 +4,7 @@ import { Modal, Button } from 'antd';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { contains } from 'ramda';
 import cx from 'classnames';
-import { EyeOutlined, SettingOutlined } from '@ant-design/icons';
+import { EyeOutlined, SettingOutlined, CopyOutlined } from '@ant-design/icons';
 
 import Toolbar from './Toolbar';
 import Container from './Container';
@@ -73,6 +73,10 @@ class FormBuilderComponent extends Component {
         this.closeSettings();
     }
 
+    addCopy = () => {
+        this.props.addCopy(this.props.copyItemData);
+    }
+
     render() {
         const {
             items,
@@ -86,6 +90,7 @@ class FormBuilderComponent extends Component {
             submitText,
             mceLanguageUrl,
             mceOnInit,
+            copyItemData,
         } = this.props;
 
         return <div className={cx(styles.experiumPlayerBuilder, 'experium-player-builder')}>
@@ -103,6 +108,14 @@ class FormBuilderComponent extends Component {
                             onClick={this.openSettings}>
                             Настройки
                         </Button>
+                        {!!copyItemData && (
+                            <Button
+                                icon={<CopyOutlined />}
+                                onClick={this.addCopy}
+                            >
+                                Вставить
+                            </Button>
+                        )}
                     </Button.Group>
                 </div>
                 <FileUrlContext.Provider value={{

@@ -14,12 +14,13 @@ class Container extends Component {
         reorderItems: PropTypes.func,
         editItem: PropTypes.func,
         removeItem: PropTypes.func,
+        copyItem: PropTypes.func,
         elements: PropTypes.object,
         placeholder: PropTypes.string
     };
 
     renderItem = (id, dragHandleProps, isDraggingOver) => {
-        const { removeItem, editItem, elements, placeholder, simpleView, editAllItem, components } = this.props;
+        const { removeItem, editItem, copyItem, elements, placeholder, simpleView, editAllItem, components } = this.props;
         const item = path([id], elements);
         const element = find(propEq('type', item.type), components);
 
@@ -31,6 +32,7 @@ class Container extends Component {
             id={id}
             removeItem={removeItem}
             editItem={editItem}
+            copyItem={copyItem}
             editAllItem={editAllItem}
             dragHandleProps={dragHandleProps}
             placeholder={placeholder}

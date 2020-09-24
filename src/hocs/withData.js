@@ -59,6 +59,15 @@ export default WrappedComponent =>
             }));
         }
 
+        addCopy = item => {
+            const id = uniqid();
+
+            this.setState(prev => ({
+                items: insert(prev.items.length, id, prev.items),
+                elements: assocPath([id], item, prev.elements)
+            }));
+        }
+
         edit = (id, prop, content) => {
             this.setState(prev => ({
                 elements: assocPath([id, ...prop.split('.').map(i => identical(NaN, +i) ? i : +i)], content, prev.elements)
@@ -76,6 +85,10 @@ export default WrappedComponent =>
                 items: without([id], prev.items),
                 elements: dissoc(id, prev.elements)
             }));
+        }
+
+        copy = id => {
+            this.props.onCopy(this.state.elements[id]);
         }
 
         setOpenedEditModal = openedEditModal => this.setState({ openedEditModal });
@@ -99,7 +112,9 @@ export default WrappedComponent =>
                 editItem: this.edit,
                 editAllItem: this.editAllItem,
                 removeItem: this.remove,
+                copyItem: this.props.onCopy ? this.copy : undefined,
                 addItem: this.add,
+                addCopy: this.addCopy,
                 editCommonSettings: this.editCommon
             };
 

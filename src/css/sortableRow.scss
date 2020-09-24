@@ -41,11 +41,13 @@
 }
 
 .sortableRow:hover .toolbarRemoveBtn,
+.sortableRow:hover .toolbarCopyBtn,
 .sortableRow:hover .toolbarEditBtn {
     opacity: 1;
 }
 
 .toolbarEditBtn,
+.toolbarCopyBtn,
 .toolbarRemoveBtn {
     position: absolute;
     opacity: 0;
@@ -62,12 +64,17 @@
 }
 
 .toolbarEditBtn:focus,
+.toolbarCopyBtn:focus,
 .toolbarRemoveBtn:focus {
     outline: none;
 }
 
 .toolbarEditBtn {
     right: 20px;
+}
+
+.toolbarCopyBtn {
+    right: 55px;
 }
 
 .sortableRowInfo {
