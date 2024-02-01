@@ -90,6 +90,7 @@ class FormBuilderComponent extends Component {
             submitText,
             mceLanguageUrl,
             mceOnInit,
+            tinymceScriptSrc,
             copyItemData,
         } = this.props;
 
@@ -123,7 +124,7 @@ class FormBuilderComponent extends Component {
                     downloadUrl,
                     uploadImages,
                 }}>
-                    <MceLanguageUrl.Provider value={{ mceLanguageUrl, mceOnInit }}>
+                    <MceLanguageUrl.Provider value={{ mceLanguageUrl, mceOnInit, tinymceScriptSrc }}>
                         <DragDropContext onDragEnd={this.onDragEnd}>
                             <Container {...this.props} />
                             <Toolbar addItem={addItem} />

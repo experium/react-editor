@@ -12,7 +12,7 @@ class MceEditor extends Component {
 
         return <div className={cx({ [styles.editorInputShort]: short, [styles.editorInput]: !hidePreview })}>
             <MceLanguageUrl.Consumer>
-                { ({ mceLanguageUrl, mceOnInit }) =>
+                { ({ mceLanguageUrl, mceOnInit, tinymceScriptSrc }) =>
                     <Editor
                         value={value}
                         onEditorChange={(value, event) => onChange(value || null, event)}
@@ -86,7 +86,9 @@ class MceEditor extends Component {
                                     }
                                 });
                             }
-                        }} />
+                        }}
+                        tinymceScriptSrc={tinymceScriptSrc}
+                    />
                 }
             </MceLanguageUrl.Consumer>
         </div>;
